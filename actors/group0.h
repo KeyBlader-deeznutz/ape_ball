@@ -331,4 +331,44 @@ extern const Gfx white_particle_small_dl_end[];
 extern const Gfx white_particle_small_dl[];
 extern const Gfx white_particle_small_unused_dl[];
 
+#include "physcube/geo_header.h"
+
+#include "physcube/collision_header.h"
+
+#include "physsphere/geo_header.h"
+
+#include "physsphere/collision_header.h"
+
+#include "m_body/geo_header.h"
+
+#include "m_head/geo_header.h"
+
+#include "m_shoulder_l/geo_header.h"
+
+#include "m_shoulder_r/geo_header.h"
+
+#include "m_arm_l/geo_header.h"
+
+#include "m_arm_r/geo_header.h"
+
+#include "m_hand_l/geo_header.h"
+
+#include "m_hand_r/geo_header.h"
+
+#include "m_thigh_l/geo_header.h"
+
+#include "m_thigh_r/geo_header.h"
+
+#include "m_leg_l/geo_header.h"
+
+#include "m_leg_r/geo_header.h"
+
+#include "m_foot_l/geo_header.h"
+
+#include "m_foot_r/geo_header.h"
+
+#include "testplane/geo_header.h"
+
+#include "testplane/collision_header.h"
+
 #endif

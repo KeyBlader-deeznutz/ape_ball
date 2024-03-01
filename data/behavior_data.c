@@ -6080,3 +6080,36 @@ const BehaviorScript bhvIntroScene[] = {
 };
 
 
+
+const BehaviorScript bhvSampleCube[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(physcube_collision),
+    CALL_NATIVE(bhv_sample_cube_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sample_cube_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvSampleSphere[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    //LOAD_COLLISION_DATA(physsphere_collision),
+    CALL_NATIVE(bhv_sample_cube_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sample_cube_loop),
+        //CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+const BehaviorScript bhvTestplane[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(testplane_collision),
+    SET_FLOAT(oCollisionDistance, 20000),
+    CALL_NATIVE(bhv_testplane_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_testplane_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
