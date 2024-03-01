@@ -265,7 +265,29 @@ void bhv_sample_cube_init(void) {
 void bhv_sample_cube_loop(void) {
 
     if (obj_has_model(o, MODEL_M_ARM_L)) {
-        Vec3f euler;
+        Vec3f euler = {0.0f, 0.65f, 0.0f};
+        Quat q = {0.0f, 0.0f, 0.0f, 1.0f};
+
+        print_text_fmt_int(20, 100, "%d", (int) (euler[0] * 100));
+        print_text_fmt_int(100, 100, "%d", (int) (euler[1] * 100));
+        print_text_fmt_int(180, 100, "%d", (int) (euler[2] * 100));
+
+        euler_to_quat(euler, q);
+
+        print_text_fmt_int(20, 80, "%d", (int) (q[0] * 100));
+        print_text_fmt_int(100, 80, "%d", (int) (q[1] * 100));
+        print_text_fmt_int(180, 80, "%d", (int) (q[2] * 100));
+        print_text_fmt_int(260, 80, "%d", (int) (q[3] * 100));
+
+        quat_to_euler(q, euler);
+
+        print_text_fmt_int(20, 60, "%d", (int) (euler[0] * 100));
+        print_text_fmt_int(100, 60, "%d", (int) (euler[1] * 100));
+        print_text_fmt_int(180, 60, "%d", (int) (euler[2] * 100));
+        
+
+        /*
+
         quat_to_euler(o->rigidBody->angleQuat, euler);
         print_text_fmt_int(20, 100, "%d", (int) (o->rigidBody->angleQuat[0] * 100));
         print_text_fmt_int(100, 100, "%d", (int) (o->rigidBody->angleQuat[1] * 100));
@@ -276,6 +298,8 @@ void bhv_sample_cube_loop(void) {
         print_text_fmt_int(20, 70, "%d", (int) (o->rigidBody->angleQuat[0] * 100));
         print_text_fmt_int(100, 70, "%d", (int) (o->rigidBody->angleQuat[1] * 100));
         print_text_fmt_int(180, 70, "%d", (int) (o->rigidBody->angleQuat[2] * 100));
+
+        */
     }
 
     if ((o->rigidBody->parentBody && o->rigidBody->parentBody->asleep == 0) || o->oTimer < 10) {
