@@ -371,4 +371,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "testplane/collision_header.h"
 
+#include "cutscene_mario/geo_header.h"
+
+
+#include "cutscene_mario/anim_header.h"
 #endif

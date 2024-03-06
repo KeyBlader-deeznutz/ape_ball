@@ -6113,3 +6113,14 @@ const BehaviorScript bhvTestplane[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+const BehaviorScript bhvCutsceneMario[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, cutscene_mario_anims),
+    ANIMATE(0),
+    CALL_NATIVE(bhv_cutscene_mario_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cutscene_mario_loop),
+    END_LOOP(),
+};
