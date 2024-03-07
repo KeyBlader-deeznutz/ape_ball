@@ -568,6 +568,7 @@
 #define MODEL_M_FOOT_R           0x10F
 
 #define MODEL_TESTPLANE           0x110
+#define MODEL_CUTSCENE_MARIO           0x111
 
 
 // Menu Models (overwrites Level Geometry IDs)

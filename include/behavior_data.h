@@ -546,3 +546,4 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvSampleCube[];
 extern const BehaviorScript bhvSampleSphere[];
 extern const BehaviorScript bhvTestplane[];
+extern const BehaviorScript bhvCutsceneMario[];

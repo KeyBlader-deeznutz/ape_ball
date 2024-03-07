@@ -51,3 +51,6 @@
 #include "m_foot_r/model.inc.c"
 #include "testplane/model.inc.c"
 #include "testplane/collision.inc.c"
+#include "cutscene_mario/model.inc.c"
+#include "cutscene_mario/anims/data.inc.c"
+#include "cutscene_mario/anims/table.inc.c"

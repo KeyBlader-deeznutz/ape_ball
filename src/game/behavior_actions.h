@@ -581,3 +581,5 @@ void bhv_sample_cube_init(void);
 void bhv_sample_cube_loop(void);
 void bhv_testplane_init(void);
 void bhv_testplane_loop(void);
+void bhv_cutscene_mario_init(void);
+void bhv_cutscene_mario_loop(void);

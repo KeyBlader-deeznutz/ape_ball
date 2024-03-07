@@ -265,8 +265,8 @@ void bhv_sample_cube_init(void) {
 void bhv_sample_cube_loop(void) {
 
     if (obj_has_model(o, MODEL_M_ARM_L)) {
-        Vec3f euler = {0.0f, 0.65f, 0.0f};
-        Quat q = {0.0f, 0.0f, 0.0f, 1.0f};
+        Vec3f euler = {-1.f, 0.3f, -0.4f};
+        Quat q;
 
         //print_text_fmt_int(20, 100, "%d", (int) (euler[0] * 100));
         //print_text_fmt_int(100, 100, "%d", (int) (euler[1] * 100));
