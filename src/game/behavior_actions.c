@@ -235,3 +235,4 @@ void set_obj_anim_with_accel_and_sound(s16 frame1, s16 frame2, s32 sound) {
 
 #include "behaviors/sample_cube.inc.c"
 #include "behaviors/testplane.inc.c"
+#include "behaviors/cutscene_mario.inc.c"
