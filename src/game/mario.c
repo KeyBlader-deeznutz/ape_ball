@@ -1706,8 +1706,8 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
 
     if (gPlayer1Controller->buttonPressed & L_TRIG) {
-        struct Object *b = spawn_object_relative(0, 0, 300, 0, o, MODEL_M_BODY, bhvSampleSphere);
-        b->parentObj = NULL;
+        //struct Object *b = spawn_object_relative(0, 0, 300, 0, o, MODEL_M_BODY, bhvSampleSphere);
+        //b->parentObj = NULL;
     }
 
     // Updates once per frame:

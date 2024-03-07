@@ -97,9 +97,24 @@ void euler_to_quat(Vec3f from, Quat q) {
 }
 */
 
+/// Normalize a quaternion.
+void quat_normalize(Quat quat) {
+    f32 invMag = 1.f / sqrtf(quat[0] * quat[0] + quat[1] * quat[1] + quat[2] * quat[2] + quat[3] * quat[3]);
+    quat[0] *= invMag;
+    quat[1] *= invMag;
+    quat[2] *= invMag;
+    quat[3] *= invMag;
+}
+
+
 /// Arcsine function using atan2 as a base
 void asine(f32 *dest, f32 x) {
     *dest = atan2f(x, sqrtf(1.f - x * x));
+}
+
+void acosine(f32 *dest, f32 x) {
+    asine(dest, x);
+    *dest = (M_PI/2.0) - *dest;
 }
 
 void quat_to_euler(Quat quat, Vec3f dest) {
@@ -175,14 +190,32 @@ void quat_mul(Quat dest, Quat a, Quat b) {
     dest[3] = a[3] * b[3] - a[0] * b[0] - a[1] * b[1] - a[2] * b[2];
 }
 
-/// Normalize a quaternion.
-void quat_normalize(Quat quat) {
-    f32 invMag = 1.f / sqrtf(quat[0] * quat[0] + quat[1] * quat[1] + quat[2] * quat[2] + quat[3] * quat[3]);
-    quat[0] *= invMag;
-    quat[1] *= invMag;
-    quat[2] *= invMag;
-    quat[3] *= invMag;
+void constrain_quaternion(Quat other, Quat source, double max_angle) {
+    // Normalize quaternions
+    quat_normalize(source);
+    quat_normalize(other);
+
+    // Calculate the angle between the quaternions
+    f32 a;
+    f32 value = absf(other[3]*other[3]+ other[0]*other[0] + other[1]*other[1] + other[2]*other[2]);
+    acosine(&a, value);
+    double angle = 2 * a;
+
+    // If the angle is greater than the maximum angle, interpolate to constrain it
+    if (angle > max_angle) {
+        double t = max_angle / angle;
+        Quat q2_constrained = {0, 0, 0, 1};
+        q2_constrained[3] = (1 - t) * other[3] + t * source[3];
+        q2_constrained[0] = (1 - t) * other[0] + t * source[0];
+        q2_constrained[1] = (1 - t) * other[1] + t * source[1];
+        q2_constrained[2] = (1 - t) * other[2] + t * source[2];
+        // Renormalize the constrained quaternion
+        quat_normalize(q2_constrained);
+
+        quat_copy(source, q2_constrained);
+    }
 }
+
 
 struct Collision gCollisions[100];
 u32 gNumCollisions = 0;
@@ -988,13 +1021,13 @@ void rigid_body_apply_displacement(struct RigidBody *body, Vec3f linear, Vec3f a
         vec3f_normalize(linear);
     }
 
-    if (body->parentBody && type == 0) {
+    if (body->parentBody && (type == 0)) {
         Vec3f multiplier = {0.86f, 0.86f, 0.96f};
         Vec3f angMultiplier = {0.86f, 0.86f, 0.96f};
         vec3f_mul(linear, multiplier);
         vec3f_mul(angular, angMultiplier);
     }
-    if (body->parentBody && type == 1) {
+    if (body->parentBody && (type == 1)) {
         Vec3f multiplier = {0.82f, 0.82f, 0.82f};
         Vec3f angMultiplier = {0.92f, 0.92f, 0.92f};
         vec3f_mul(linear, multiplier);
@@ -1105,7 +1138,15 @@ void rigid_body_update_velocity(struct RigidBody *body) {
     // Calculate angular velocity
     // Δω = (τ / I) * Δt
     Vec3f angularAccel;
+    
     linear_mtxf_mul_vec3f(body->invInertia, angularAccel, body->netTorque);
+
+    if (obj_has_model(body->obj, MODEL_M_BODY)) {
+        angularAccel[0] *= 0.2f;
+        angularAccel[1] *= 0.2f;
+        angularAccel[2] *= 0.2f;
+    }
+
     vec3f_add_scaled(body->angularVel, angularAccel, dt);
 
     // Damping
@@ -1169,12 +1210,16 @@ void do_rigid_body_step(void) {
     for (u32 i = 0; i < MAX_RIGID_BODIES; i++) {
         if (gRigidBodies[i].allocated) {
             struct RigidBody *body = &gRigidBodies[i];
+
+            calculate_mesh(body, sCurrentVertices, sCurrentTris, sCurrentQuads);
             
             if (body->obj && body->obj->oBehParams2ndByte > 1 && body->obj->oBehParams2ndByte < 50) {
                 body->obj->rigidBody->centerOfMass[0] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][0];
                 body->obj->rigidBody->centerOfMass[1] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][1];
                 body->obj->rigidBody->centerOfMass[2] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][2];
                 }
+
+            //calculate_mesh(body, sCurrentVertices, sCurrentTris, sCurrentQuads);
 
             
         }

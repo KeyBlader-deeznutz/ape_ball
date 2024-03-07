@@ -145,7 +145,7 @@ struct MeshInfo M_Head_Mesh = {
 };
 
 struct MeshInfo M_Limb_R_Mesh = {
-    M_Limb_R_Verts,
+    M_Limb_L_Verts,
     NULL,
     NULL,
     NULL,
@@ -156,7 +156,7 @@ struct MeshInfo M_Limb_R_Mesh = {
 };
 
 struct MeshInfo M_Limb_L_Mesh = {
-    M_Limb_L_Verts,
+    M_Limb_R_Verts,
     NULL,
     NULL,
     NULL,
@@ -268,22 +268,22 @@ void bhv_sample_cube_loop(void) {
         Vec3f euler = {0.0f, 0.65f, 0.0f};
         Quat q = {0.0f, 0.0f, 0.0f, 1.0f};
 
-        print_text_fmt_int(20, 100, "%d", (int) (euler[0] * 100));
-        print_text_fmt_int(100, 100, "%d", (int) (euler[1] * 100));
-        print_text_fmt_int(180, 100, "%d", (int) (euler[2] * 100));
+        //print_text_fmt_int(20, 100, "%d", (int) (euler[0] * 100));
+        //print_text_fmt_int(100, 100, "%d", (int) (euler[1] * 100));
+        //print_text_fmt_int(180, 100, "%d", (int) (euler[2] * 100));
 
-        euler_to_quat(euler, q);
+        //euler_to_quat(euler, q);
 
-        print_text_fmt_int(20, 80, "%d", (int) (q[0] * 100));
-        print_text_fmt_int(100, 80, "%d", (int) (q[1] * 100));
-        print_text_fmt_int(180, 80, "%d", (int) (q[2] * 100));
-        print_text_fmt_int(260, 80, "%d", (int) (q[3] * 100));
+        //print_text_fmt_int(20, 80, "%d", (int) (q[0] * 100));
+        //print_text_fmt_int(100, 80, "%d", (int) (q[1] * 100));
+        //print_text_fmt_int(180, 80, "%d", (int) (q[2] * 100));
+        //print_text_fmt_int(260, 80, "%d", (int) (q[3] * 100));
 
-        quat_to_euler(q, euler);
+        //quat_to_euler(q, euler);
 
-        print_text_fmt_int(20, 60, "%d", (int) (euler[0] * 100));
-        print_text_fmt_int(100, 60, "%d", (int) (euler[1] * 100));
-        print_text_fmt_int(180, 60, "%d", (int) (euler[2] * 100));
+        //print_text_fmt_int(20, 60, "%d", (int) (euler[0] * 100));
+        //print_text_fmt_int(100, 60, "%d", (int) (euler[1] * 100));
+        //print_text_fmt_int(180, 60, "%d", (int) (euler[2] * 100));
         
 
         /*
@@ -301,6 +301,14 @@ void bhv_sample_cube_loop(void) {
 
         */
     }
+
+    if (o->rigidBody->parentBody) {
+        //if (!((obj_has_model(o, MODEL_M_ARM_L) || obj_has_model(o, MODEL_M_ARM_R) || obj_has_model(o, MODEL_M_HAND_L) || obj_has_model(o, MODEL_M_HAND_R)))) {
+            //constrain_quaternion(o->rigidBody->parentBody->angleQuat, o->rigidBody->angleQuat, M_PI/2.0);
+        //}
+    }
+        
+    
 
     if ((o->rigidBody->parentBody && o->rigidBody->parentBody->asleep == 0) || o->oTimer < 10) {
         o->rigidBody->asleep = 0;
@@ -329,34 +337,6 @@ void bhv_sample_cube_loop(void) {
             //o->rigidBody->centerOfMass[0] += 30.0f;
         }
 
-    //if (0) {
-        if (con->maxPitch && con->minPitch) {
-            if (con->angleQuat[0] < con->minPitch) {
-                con->angleQuat[0] = con->minPitch;
-            }
-            if (con->angleQuat[0] > con->maxPitch) {
-                con->angleQuat[0] = con->maxPitch;
-            }
-        }
-        if (con->maxYaw && con->minYaw) {
-            if (con->angleQuat[1] < con->minYaw) {
-                con->angleQuat[1] = con->minYaw;
-            }
-            if (con->angleQuat[1] > con->maxYaw) {
-                con->angleQuat[1] = con->maxYaw;
-            }
-        }
-        if (con->maxRoll && con->maxRoll) {
-            if (con->angleQuat[2] < con->minRoll) {
-                con->angleQuat[2] = con->minRoll;
-            }
-            if (con->angleQuat[2] > con->maxRoll) {
-                con->angleQuat[2] = con->maxRoll;
-            }
-
-            //con->angleQuat[3] = 0;
-        }
-    //}
 
     }
 
