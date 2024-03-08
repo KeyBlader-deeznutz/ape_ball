@@ -154,4 +154,6 @@ extern const struct MovtexQuadCollection inside_castle_movtex_moat_water[];
 // script
 extern const LevelScript level_castle_inside_entry[];
 
+extern f32 inside_castle_scene[][2][3];
+
 #endif

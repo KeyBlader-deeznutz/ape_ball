@@ -6124,3 +6124,12 @@ const BehaviorScript bhvCutsceneMario[] = {
         CALL_NATIVE(bhv_cutscene_mario_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvCutsceneCastle[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_cutscene_castle_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cutscene_castle_loop),
+    END_LOOP(),
+};

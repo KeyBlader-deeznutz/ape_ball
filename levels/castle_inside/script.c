@@ -53,6 +53,7 @@ static const LevelScript script_func_local_1[] = {
     OBJECT(/*model*/ MODEL_NONE, /*pos*/ -1024,  -50,   717, /*angle*/ 0,  180, 0, /*behParam*/ 0x001F0000, /*beh*/ bhvInstantActiveWarp),
 
     OBJECT(/*model*/ MODEL_CUTSCENE_MARIO, /*pos*/ -1024,  -50,   717, /*angle*/ 0,  0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvCutsceneMario),
+        OBJECT(/*model*/ MODEL_NONE, /*pos*/ -1024,  -50,   717, /*angle*/ 0,  0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvCutsceneCastle),
 
     OBJECT(/*model*/ MODEL_NONE, /*pos*/ -1024,  900,   717, /*angle*/ 0,  180, 0, /*behParam*/ 0x00200000, /*beh*/ bhvAirborneWarp),
     OBJECT(/*model*/ MODEL_NONE, /*pos*/ -1024,  900,   717, /*angle*/ 0,  180, 0, /*behParam*/ 0x00210000, /*beh*/ bhvAirborneDeathWarp),
