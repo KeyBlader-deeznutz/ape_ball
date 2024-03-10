@@ -923,9 +923,9 @@ const GeoLayout cutscene_mario_002_switch_opt0_001_switch_opt0_000_switch_opt0_0
 	GEO_RETURN(),
 };
 const GeoLayout cutscene_mario_geo[] = {
-	GEO_NODE_START(),
+	GEO_CULLING_RADIUS(0x7FFF),
 	GEO_OPEN_NODE(),
-		GEO_SHADOW(1, 180, 100),
+		//GEO_SHADOW(1, 180, 100),
 		GEO_OPEN_NODE(),
 			GEO_SCALE(LAYER_FORCE, 16384),
 			GEO_OPEN_NODE(),

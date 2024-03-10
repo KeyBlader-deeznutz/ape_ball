@@ -1438,7 +1438,7 @@ static const u16 cutscene_mario_anim_mario_geoAction_001_indices[] = {
 };
 
 static const struct Animation cutscene_mario_anim_mario_geoAction_001 = {
-	0,
+	1,
 	0,
 	0,
 	5,

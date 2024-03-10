@@ -541,10 +541,11 @@ extern const BehaviorScript bhvEndBirds2[];
 extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
 
-#endif // BEHAVIOR_DATA_H
-
 extern const BehaviorScript bhvSampleCube[];
 extern const BehaviorScript bhvSampleSphere[];
 extern const BehaviorScript bhvTestplane[];
 extern const BehaviorScript bhvCutsceneMario[];
 extern const BehaviorScript bhvCutsceneCastle[];
+
+#endif // BEHAVIOR_DATA_H
+

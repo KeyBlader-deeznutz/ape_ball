@@ -575,8 +575,6 @@ Gfx *geo_scale_bowser_key(s32 callContext, struct GraphNode *node, UNUSED Mat4 m
 extern struct WaterDropletParams gShallowWaterSplashDropletParams;
 extern struct WaterDropletParams gShallowWaterWaveDropletParams;
 
-#endif // BEHAVIOR_ACTIONS_H
-
 void bhv_sample_cube_init(void);
 void bhv_sample_cube_loop(void);
 void bhv_testplane_init(void);
@@ -585,3 +583,6 @@ void bhv_cutscene_mario_init(void);
 void bhv_cutscene_mario_loop(void);
 void bhv_cutscene_castle_init(void);
 void bhv_cutscene_castle_loop(void);
+
+#endif // BEHAVIOR_ACTIONS_H
+
