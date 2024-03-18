@@ -265,7 +265,7 @@ const LevelScript level_castle_inside_entry[] = {
         OBJECT(/*model*/ MODEL_TOAD,       /*pos*/  1524,  307,   458, /*angle*/ 0, 110, 0, /*behParam*/ DIALOG_134 << 24, /*beh*/ bhvToadMessage),
         OBJECT(/*model*/ MODEL_TOAD,       /*pos*/   596, -306, -2637, /*angle*/ 0, 152, 0, /*behParam*/ DIALOG_135 << 24, /*beh*/ bhvToadMessage),
         JUMP_LINK(script_func_local_1),
-        WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_CASTLE_GROUNDS, /*destArea*/ 0x01, /*destNode*/ 0x03, /*flags*/ WARP_NO_CHECKPOINT),
+        WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_CASTLE_GROUNDS, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
         TERRAIN(/*terrainData*/ inside_castle_seg7_area_1_collision),
         ROOMS(/*surfaceRooms*/ inside_castle_seg7_area_1_rooms),
         MACRO_OBJECTS(/*objList*/ inside_castle_seg7_area_1_macro_objs),

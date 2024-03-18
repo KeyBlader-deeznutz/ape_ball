@@ -750,6 +750,60 @@ void load_object_collision_model(void) {
     profiler_collision_update(first);
 }
 
+void special_load_object_collision_model(struct Object *obj) {
+    PUPPYPRINT_GET_SNAPSHOT();
+    TerrainData *collisionData = obj->collisionData;
+
+    f32 sqrLateralDist;
+    vec3f_get_lateral_dist_squared(&obj->oPosVec, &gMarioObject->oPosVec, &sqrLateralDist);
+
+    f32 verticalMarioDiff = gMarioObject->oPosY - obj->oPosY;
+
+#ifdef AUTO_COLLISION_DISTANCE
+    if (!(o->oFlags & OBJ_FLAG_DONT_CALC_COLL_DIST)) {
+        get_optimal_coll_dist(obj);
+    }
+#endif
+
+    // If the object collision is supposed to be loaded more than the
+    // drawing distance, extend the drawing range.
+    if (obj->oCollisionDistance > obj->oDrawingDistance) {
+        obj->oDrawingDistance = obj->oCollisionDistance;
+    }
+    
+    s32 inColRadius = (
+           (sqrLateralDist < sqr(obj->oCollisionDistance))
+        && (verticalMarioDiff > 0 || verticalMarioDiff > -obj->oCollisionDistance)
+        && (verticalMarioDiff < 0 || verticalMarioDiff < obj->oCollisionDistance + 2000.f)
+    );
+
+    // Update if no Time Stop, in range, and in the current room.
+    if (
+        !(gTimeStopState & TIME_STOP_ACTIVE)
+        && inColRadius
+        && !(obj->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)
+    ) {
+        collisionData++;
+        transform_object_vertices(&collisionData, sVertexData);
+
+        // TERRAIN_LOAD_CONTINUE acts as an "end" to the terrain data.
+        while (*collisionData != TERRAIN_LOAD_CONTINUE) {
+            load_object_surfaces(&collisionData, sVertexData, TRUE);
+        }
+    }
+
+    f32 marioDist = obj->oDistanceToMario;
+
+    // On an object's first frame, the distance is set to 19000.0f.
+    // If the distance hasn't been updated, update it now.
+    if (marioDist == 19000.0f) {
+        marioDist = dist_between_objects(obj, gMarioObject);
+    }
+
+    COND_BIT((marioDist < obj->oDrawingDistance), obj->header.gfx.node.flags, GRAPH_RENDER_ACTIVE);
+    profiler_collision_update(first);
+}
+
 /**
  * Transform an object's vertices and add them to the static surface pool.
  */

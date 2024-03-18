@@ -1705,9 +1705,10 @@ void queue_rumble_particles(struct MarioState *m) {
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
 
-    if (gPlayer1Controller->buttonPressed & L_TRIG) {
-        //struct Object *b = spawn_object_relative(0, 0, 300, 0, o, MODEL_M_BODY, bhvSampleSphere);
-        //b->parentObj = NULL;
+    if (gCurrLevelNum != LEVEL_CASTLE && gMarioState->spawnedRagdoll == 0) {
+        struct Object *b = spawn_object_relative(0, 0, 300, 0, o, MODEL_M_BODY, bhvSampleSphere);
+        b->parentObj = NULL;
+        gMarioState->spawnedRagdoll = 1;
     }
 
     // Updates once per frame:
@@ -1863,6 +1864,8 @@ void init_mario(void) {
 
     vec3f_copy(gMarioState->marioObj->header.gfx.pos, gMarioState->pos);
     vec3s_set(gMarioState->marioObj->header.gfx.angle, 0, gMarioState->faceAngle[1], 0);
+
+    gMarioState->spawnedRagdoll = 0;
 
     Vec3s capPos;
     if (save_file_get_cap_pos(capPos)) {

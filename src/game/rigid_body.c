@@ -68,7 +68,7 @@ void quat_normalize(Quat quat) {
 
 /// Arcsine function using atan2 as a base
 void asine(f32 *dest, f32 x) {
-    *dest = atan2f(x, sqrtf(1.f - x * x));
+    *dest = atan2f(x, sqrtf(absf(1.0f - x * x)));
 }
 
 void acosine(f32 *dest, f32 x) {
@@ -150,7 +150,7 @@ void quat_mul(Quat dest, Quat a, Quat b) {
     dest[3] = a[3] * b[3] - a[0] * b[0] - a[1] * b[1] - a[2] * b[2];
 }
 
-void constrain_quaternion(Quat other, Quat source, double max_angle) {
+void constrain_quaternion(Quat other, Quat source, f32 max_angle) {
     // Normalize quaternions
     quat_normalize(source);
     quat_normalize(other);
@@ -159,11 +159,11 @@ void constrain_quaternion(Quat other, Quat source, double max_angle) {
     f32 a;
     f32 value = absf(other[3]*other[3]+ other[0]*other[0] + other[1]*other[1] + other[2]*other[2]);
     acosine(&a, value);
-    double angle = 2 * a;
+    f32 angle = 2 * a;
 
     // If the angle is greater than the maximum angle, interpolate to constrain it
     if (angle > max_angle) {
-        double t = max_angle / angle;
+        f32 t = max_angle / angle;
         Quat q2_constrained = {0, 0, 0, 1};
         q2_constrained[3] = (1 - t) * other[3] + t * source[3];
         q2_constrained[0] = (1 - t) * other[0] + t * source[0];
@@ -810,16 +810,16 @@ void rigid_body_collision_impulse(struct RigidBody *body1, Vec3f hitPoint, Vec3f
     if (body1->parentBody) {
         Vec3f diminishedLinear;
         vec3f_copy(diminishedLinear, body1Linear);
-        diminishedLinear[0] /= 5;
-        diminishedLinear[1] /= 5;
-        diminishedLinear[2] /= 5;
+        diminishedLinear[0] /= 9;
+        diminishedLinear[1] /= 9;
+        diminishedLinear[2] /= 9;
         vec3f_add(body1->parentBody->linearVel, diminishedLinear);
 
         Vec3f diminishedAngular;
         vec3f_copy(diminishedAngular, body1Angular);
-        diminishedAngular[0] /= 8;
-        diminishedAngular[1] /= 8;
-        diminishedAngular[2] /= 8;
+        diminishedAngular[0] /= 14;
+        diminishedAngular[1] /= 14;
+        diminishedAngular[2] /= 14;
         vec3f_add(body1->parentBody->angularVel, diminishedAngular);
     }
 }
@@ -1113,9 +1113,10 @@ void rigid_body_update_velocity(struct RigidBody *body) {
     vec3f_scale(body->linearVel, body->linearVel, DAMPING);
     vec3f_scale(body->angularVel, body->angularVel, DAMPING);
 
-    if (body->parentBody) {
-        //vec3f_set(body->linearVel, 0.0f, 0.0f, 0.0f);
-        //vec3f_set(body->angularVel, 0.0f, 0.0f, 0.0f);
+    if (!body->parentBody) {
+        body->angularVel[0] = CLAMP(body->angularVel[0], -0.8f, 0.6f);
+        body->angularVel[1] = CLAMP(body->angularVel[1], -0.8f, 0.6f);
+        body->angularVel[2] = CLAMP(body->angularVel[2], -0.8f, 0.6f);
     }
 
     rigid_body_update_matrix(body);
@@ -1162,8 +1163,11 @@ void do_rigid_body_step(void) {
     // Update position
     for (u32 i = 0; i < MAX_RIGID_BODIES; i++) {
         if (gRigidBodies[i].allocated) {
+            struct RigidBody *body = &gRigidBodies[i];
+            if (!(body->obj && body->obj->oBehParams2ndByte > 1 && body->obj->oBehParams2ndByte < 50)) {
             rigid_body_update_position_from_collisions(&gRigidBodies[i]);
             rigid_body_update_obj(&gRigidBodies[i]);
+            }
         }
     }
 
@@ -1171,15 +1175,20 @@ void do_rigid_body_step(void) {
         if (gRigidBodies[i].allocated) {
             struct RigidBody *body = &gRigidBodies[i];
 
-            calculate_mesh(body, sCurrentVertices, sCurrentTris, sCurrentQuads);
+            //calculate_mesh(body, sCurrentVertices, sCurrentTris, sCurrentQuads);
             
             if (body->obj && body->obj->oBehParams2ndByte > 1 && body->obj->oBehParams2ndByte < 50) {
-                body->obj->rigidBody->centerOfMass[0] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][0];
-                body->obj->rigidBody->centerOfMass[1] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][1];
-                body->obj->rigidBody->centerOfMass[2] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][2];
+                body->centerOfMass[0] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][0];
+                body->centerOfMass[1] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][1];
+                body->centerOfMass[2] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][2];
+                body->transform[3][0] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][0];
+                body->transform[3][1] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][1];
+                body->transform[3][2] = body->obj->parentObj->rigidBody->attachPoint[body->obj->oBehParams2ndByte - 4][2];
+                calculate_mesh(body, sCurrentVertices, sCurrentTris, sCurrentQuads);
+                rigid_body_update_obj(&gRigidBodies[i]);
                 }
 
-            //calculate_mesh(body, sCurrentVertices, sCurrentTris, sCurrentQuads);
+            
 
             
         }
