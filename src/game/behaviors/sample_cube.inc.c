@@ -281,15 +281,26 @@ void bhv_sample_cube_loop(void) {
         return;
     }
 
-        if (gPlayer1Controller->buttonPressed & L_TRIG) {
-            Vec3f force;
-            force[1] = 150.0f;
-            rigid_body_add_force(o->rigidBody, &gMarioState->pos, force, TRUE);
-        }
-
-        if (gMarioState->floor && gMarioState->floor->type == SURFACE_GOAL && ((gMarioState->pos[1] - gMarioState->floorHeight) < 100) && gChangingLevel == 0) {
+        if ((gPlayer1Controller->buttonPressed & L_TRIG) || (gMarioState->floor && gMarioState->floor->type == SURFACE_GOAL && ((gMarioState->pos[1] - gMarioState->floorHeight) < 100) && gChangingLevel == 0)) {
 
             gChangingLevel = 1;
+        }
+
+        if ((gPlayer1Controller->buttonPressed & Z_TRIG) && (gMarioState->floor && gMarioState->floor->type == SURFACE_VERTICAL_BOOST && ((gMarioState->pos[1] - gMarioState->floorHeight) < 200) && gChangingLevel == 0)) {
+
+            Vec3f force;
+            force[0] = 500.0f * gMarioState->floor->normal.x;
+            force[1] = 3000.0f * gMarioState->floor->normal.y;
+            force[2] = 500.0f * gMarioState->floor->normal.z;
+            Vec3f originPoint;
+
+            originPoint[0] = gMarioState->pos[0] - gMarioState->floor->normal.x;
+            originPoint[1] = gMarioState->pos[1] - gMarioState->floor->normal.y;
+            originPoint[2] = gMarioState->pos[2] - gMarioState->floor->normal.z;
+
+            print_text(100, 100, "AAAHHHH");
+            
+            rigid_body_add_force(o->rigidBody, originPoint, force, TRUE);
         }
 
     }

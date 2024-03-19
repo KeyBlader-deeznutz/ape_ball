@@ -383,4 +383,16 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "stage2/collision_header.h"
 
+#include "stage3/geo_header.h"
+
+#include "stage3/collision_header.h"
+
+#include "stage4/geo_header.h"
+
+#include "stage4/collision_header.h"
+
+#include "stage5/geo_header.h"
+
+#include "stage5/collision_header.h"
+
 #endif

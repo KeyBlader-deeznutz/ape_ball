@@ -77,6 +77,51 @@ const LevelScript level_bob_entry[] = {
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
+	AREA(3, bob_area_3),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_BOB, 0x03, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_STAGE3, 0, 0, 0, 0, 0, 0, (3 << 16), bhvTestplane),
+		OBJECT(MODEL_NONE, -5048, 2754, 1719, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
+		TERRAIN(bob_area_3_collision),
+		MACRO_OBJECTS(bob_area_3_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
+	AREA(4, bob_area_4),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_BOB, 0x03, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_STAGE4, 0, 0, 0, 0, 0, 0, (4 << 16), bhvTestplane),
+		OBJECT(MODEL_NONE, -5248, 14, -4286, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
+		TERRAIN(bob_area_4_collision),
+		MACRO_OBJECTS(bob_area_4_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
+	AREA(5, bob_area_5),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_BOB, 0x03, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_STAGE5, 0, 0, 0, 0, 0, 0, (5 << 16), bhvTestplane),
+		OBJECT(MODEL_NONE, -2493, -548, 0, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
+		TERRAIN(bob_area_5_collision),
+		MACRO_OBJECTS(bob_area_5_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
 	FREE_LEVEL_POOL(),
 	MARIO_POS(0x01, 0, -622, 434, 0),
 	CALL(0, lvl_init_or_update),

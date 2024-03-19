@@ -133,6 +133,9 @@ const LevelScript level_main_scripts_entry[] = {
 
         LOAD_MODEL_FROM_GEO(MODEL_STAGE1,            stage1_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE2,            stage2_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_STAGE3,            stage3_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_STAGE4,            stage4_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_STAGE5,            stage5_geo),
 #ifdef IA8_30FPS_COINS
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN,             silver_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN_NO_SHADOW,   silver_coin_no_shadow_geo),
