@@ -54,3 +54,7 @@
 #include "cutscene_mario/model.inc.c"
 #include "cutscene_mario/anims/data.inc.c"
 #include "cutscene_mario/anims/table.inc.c"
+#include "stage1/model.inc.c"
+#include "stage1/collision.inc.c"
+#include "stage2/model.inc.c"
+#include "stage2/collision.inc.c"

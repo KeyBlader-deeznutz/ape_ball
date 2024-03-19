@@ -30,7 +30,7 @@
  * This allows you to quickly test the level you're working on.
  * If you want the game to boot normally, just comment out the define again.
  */
-#define TEST_LEVEL LEVEL_CASTLE_GROUNDS
+#define TEST_LEVEL LEVEL_BOB
 
 /**
  * Enables debug level select. Hold L while the game boots to turn it on.
@@ -45,7 +45,7 @@
 /**
  * Enables a custom, enhanced performance profiler. (Enables PUPPYPRINT by default in config_safeguards).
  */
-// #define PUPPYPRINT_DEBUG
+ #define PUPPYPRINT_DEBUG
 
 /**
  * Uses cycles instead of microseconds in Puppyprint debug output.
@@ -56,7 +56,7 @@
  * A vanilla style debug mode. It doesn't rely on a text engine, but it's much less powerful that PUPPYPRINT_DEBUG.
  * Press D-pad left to show the debug UI.
  */
-// #define VANILLA_STYLE_CUSTOM_DEBUG
+ #define VANILLA_STYLE_CUSTOM_DEBUG
 
 /**
  * Visual debug enables some collision visuals. Tapping Right on the D-pad will cycle between visual hitboxes, visual surfaces, both, and neither.

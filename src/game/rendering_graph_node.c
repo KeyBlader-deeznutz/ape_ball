@@ -1153,40 +1153,12 @@ void geo_process_object(struct Object *node) {
         // If the throw matrix is null and the object is invisible, there is no need
         // to update billboarding, scale, rotation, etc. 
         // This still updates translation since it is needed for sound.
-        if (0 && obj_has_behavior(node, bhvTestplane)) {
-
-                    Vec3f rotPos;
-                    vec3f_copy(rotPos, gMarioState->pos);
-                    Vec3f antiRotPos;
-                    antiRotPos[0] = -rotPos[0];
-                    antiRotPos[1] = -rotPos[1];
-                    antiRotPos[2] = -rotPos[2];
-
-                    Mat4 mat1;
-                    Mat4 mat2;
-                    Mat4 result;
-                    Mat4 result2;
-
-                    mtxf_translate(mat1, antiRotPos);
-                    mtxf_rotate_zxy_and_translate(mat2, rotPos, node->header.gfx.angle);
-
-                    mtxf_mul(result2, mat2, mat1);
-
-                    mtxf_scale_vec3f(result, *node->header.gfx.throwMatrix, node->header.gfx.scale);
-
-                    mtxf_mul(gMatStack[gMatStackIndex + 1], result, result2);
-
-                    //special_load_object_collision_model(node);
-                }
-        else if (isInvisible && noThrowMatrix) {
+        if (isInvisible && noThrowMatrix) {
             mtxf_translate(gMatStack[gMatStackIndex + 1], node->header.gfx.pos);
         }
         else{
             if (!noThrowMatrix) {
                 mtxf_scale_vec3f(gMatStack[gMatStackIndex + 1], *node->header.gfx.throwMatrix, node->header.gfx.scale);
-                if (obj_has_behavior(node, bhvTestplane)) {
-                    print_text(100, 100, "AAA");
-            }
             } else if (node->header.gfx.node.flags & GRAPH_RENDER_BILLBOARD) {
                 mtxf_billboard(gMatStack[gMatStackIndex + 1], gMatStack[gMatStackIndex],
                             node->header.gfx.pos, node->header.gfx.scale, gCurGraphNodeCamera->roll);

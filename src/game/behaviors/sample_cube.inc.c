@@ -9,6 +9,8 @@ Vec3f M_Size = {17.0f, 17.0f, 17.0f};
 Vec3f Tiny_Size = {17.0f, 17.0f, 17.0f};
 Vec3f Arm_Size = {11.0f, 11.0f, 11.0f};
 
+u8 gChangingLevel;
+
 
 Vec3f M_Body_Verts[13] = {
 	{1.0f, 1.4f, 1.0f},
@@ -267,11 +269,33 @@ void bhv_sample_cube_loop(void) {
     
 
     if (obj_has_model(o, MODEL_M_BODY)) {
+
+        if (gChangingLevel == 1) {
+            deallocate_rigid_body(o->rigidBody);
+        obj_mark_for_deletion(o);
+        for (int i = 0; i < MAX_RIGID_BODIES; i++) {
+            
+        }
+        gChangingLevel = 0;
+        initiate_warp(LEVEL_BOB, gCurrAreaIndex + 1, 0x0A, 0);
+        return;
+    }
+
         if (gPlayer1Controller->buttonPressed & L_TRIG) {
             Vec3f force;
             force[1] = 150.0f;
             rigid_body_add_force(o->rigidBody, &gMarioState->pos, force, TRUE);
         }
+
+        if (gMarioState->floor && gMarioState->floor->type == SURFACE_GOAL && ((gMarioState->pos[1] - gMarioState->floorHeight) < 100) && gChangingLevel == 0) {
+
+            gChangingLevel = 1;
+        }
+
+    }
+    else if (gChangingLevel == 1) {
+        deallocate_rigid_body(o->rigidBody);
+        obj_mark_for_deletion(o);
     }
 
     if (o->rigidBody->parentBody) {

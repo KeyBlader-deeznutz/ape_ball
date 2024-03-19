@@ -35,3 +35,5 @@
 #include "m_foot_r/geo.inc.c"
 #include "testplane/geo.inc.c"
 #include "cutscene_mario/geo.inc.c"
+#include "stage1/geo.inc.c"
+#include "stage2/geo.inc.c"

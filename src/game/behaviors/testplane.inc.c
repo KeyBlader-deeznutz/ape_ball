@@ -1,5 +1,14 @@
+#include "actors/group0.h"
+
 void bhv_testplane_init(void) {
-   
+    switch(o->oBehParams2ndByte) {
+        case 1:
+            obj_set_collision_data(o, stage1_collision);
+        break;
+        case 2:
+            obj_set_collision_data(o, stage2_collision);
+        break;
+    }
 }
 
 void bhv_testplane_loop(void) {
@@ -9,8 +18,8 @@ void bhv_testplane_loop(void) {
     //print_text_fmt_int(100, 100, "%d", (int) gMarioState->controller->stickX);
     //print_text_fmt_int(100, 80, "%d", (int) gMarioState->controller->stickY);
 
-    o->oMoveAnglePitch = approach_s16_symmetric(o->oMoveAnglePitch, 0x2000 * sins(0x100 * gMarioState->controller->stickY) * coss(0x100 * gMarioState->controller->stickX), 0x400);
-    o->oMoveAngleRoll = approach_s16_symmetric(o->oMoveAngleRoll, 0x2000 * sins(0x100 * gMarioState->controller->stickX) * coss(0x100 * gMarioState->controller->stickY), 0x400);
+    o->oMoveAnglePitch = approach_s16_symmetric(o->oMoveAnglePitch, 0x60 * gMarioState->controller->stickMag * coss(camYaw), 0x400);
+    o->oMoveAngleRoll = approach_s16_symmetric(o->oMoveAngleRoll, 0x60 * gMarioState->controller->stickMag * -sins(camYaw), 0x400);
 
     obj_update_gfx_pos_and_angle(o);
     //if (obj_has_behavior(node, bhvTestplane)) {

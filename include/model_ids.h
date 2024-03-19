@@ -570,6 +570,17 @@
 #define MODEL_TESTPLANE           0x110
 #define MODEL_CUTSCENE_MARIO           0x111
 
+#define MODEL_STAGE1        0x112
+#define MODEL_STAGE2        0x113
+#define MODEL_STAGE3        0x114
+#define MODEL_STAGE4        0x115
+#define MODEL_STAGE5        0x116
+#define MODEL_STAGE6        0x117
+#define MODEL_STAGE7        0x118
+#define MODEL_STAGE8        0x119
+#define MODEL_STAGE9        0x11A
+#define MODEL_STAGE10        0x11B
+
 
 // Menu Models (overwrites Level Geometry IDs)
 #define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0

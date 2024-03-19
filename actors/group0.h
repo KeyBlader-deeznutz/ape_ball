@@ -375,4 +375,12 @@ extern const Gfx white_particle_small_unused_dl[];
 
 
 #include "cutscene_mario/anim_header.h"
+#include "stage1/geo_header.h"
+
+#include "stage1/collision_header.h"
+
+#include "stage2/geo_header.h"
+
+#include "stage2/collision_header.h"
+
 #endif
