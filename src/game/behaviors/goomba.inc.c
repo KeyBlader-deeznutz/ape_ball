@@ -34,7 +34,7 @@ struct GoombaProperties {
  * Properties for regular, huge, and tiny goombas.
  */
 static struct GoombaProperties sGoombaProperties[] = {
-    { 1.5f, SOUND_OBJ_ENEMY_DEATH_HIGH, 4000, 1 },
+    { 2.0f, SOUND_OBJ_ENEMY_DEATH_HIGH, 4000, 1 },
     { 3.5f, SOUND_OBJ_ENEMY_DEATH_LOW, 4000, 2 },
     { 0.5f, SOUND_OBJ_ENEMY_DEATH_HIGH, 1500, 0 },
 };
@@ -119,6 +119,10 @@ void bhv_goomba_init(void) {
     o->oDamageOrCoinValue = sGoombaProperties[o->oGoombaSize].damage;
 
     o->oGravity = -8.0f / 3.0f * o->oGoombaScale;
+
+    o->oLastFrameParentRelativePosX = o->oPosX;
+        o->oLastFrameParentRelativePosY = o->oPosY;
+        o->oLastFrameParentRelativePosZ = o->oPosZ;
 
 #ifdef FLOOMBAS
     if (o->oIsFloomba) {
@@ -364,7 +368,45 @@ void bhv_goomba_update(void) {
             mark_goomba_as_dead();
         }
 
-        cur_obj_move_standard_relative_parent(-78);
+        cur_obj_move_standard(-78);
+
+        //o->oForwardVel = 3.0f;
+        //o->oMoveAngleYaw = 0;
+
+        if (o->oFlags & OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT) {
+
+            o->oParentRelativePosX += (o->oForwardVel * sins(o->oMoveAngleYaw)) * coss(o->oMoveAnglePitch);
+            o->oParentRelativePosZ += (o->oForwardVel * coss(o->oMoveAngleYaw)) * coss(o->oMoveAngleRoll);
+
+            o->oFaceAngleYaw = o->oMoveAngleYaw;
+            
+            o->oPosX = o->oParentRelativePosX;
+            o->oPosY = o->oParentRelativePosY;
+            o->oPosZ = o->oParentRelativePosZ;
+
+            struct Surface *floor;
+            find_floor(o->oPosX, o->oPosY + 4000, o->oPosZ, &floor);
+
+            if (floor && floor->type == SURFACE_DEATH_PLANE) {
+                //o->oFlags &= ~(OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT);
+            }
+        }
+        
+
+        if (gMarioState->ragdoll && lateral_dist_between_object_and_point(o, gMarioState->ragdoll->rigidBody->centerOfMass) < 150.0f && o->oTimer > 5) {
+            struct Object *body = gMarioState->ragdoll;
+            s16 angle = atan2s(o->oPosZ - gMarioState->ragdoll->rigidBody->centerOfMass[2], o->oPosX - gMarioState->ragdoll->rigidBody->centerOfMass[0]);
+            body->rigidBody->asleep = 0;
+            body->rigidBody->linearVel[0] += 80.0f * -sins(angle);
+            body->rigidBody->linearVel[1] += 30.0f;
+            body->rigidBody->linearVel[2] += 80.0f * -coss(angle);
+
+            cur_obj_play_sound_2(SOUND_ACTION_HIT);
+
+            o->oTimer = 0;
+        }
+
+
     } else {
         o->oAnimState = GOOMBA_ANIM_STATE_EYES_CLOSED;
 #ifdef FLOOMBAS

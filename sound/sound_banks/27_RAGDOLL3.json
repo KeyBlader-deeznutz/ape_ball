@@ -1,0 +1,23 @@
+{
+  "date": "1996-03-19",
+  "sample_bank": "sfx_ragdoll3",
+  "envelopes": {
+    "envelope0": [
+      [
+        1,
+        32700
+      ],
+      "hang"
+    ]
+  },
+  "instruments": {
+    "inst_rd3": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "rd3"
+    }
+  },
+  "instrument_list": [
+    "inst_rd3"
+  ]
+}

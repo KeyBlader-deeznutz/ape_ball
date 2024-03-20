@@ -200,6 +200,8 @@ void bhv_sample_cube_init(void) {
         spawn_object_relative(8, 0, 0, 0, o, MODEL_M_THIGH_R, bhvSampleSphere);
         spawn_object_relative(4, 0, 0, 0, o, MODEL_M_SHOULDER_L, bhvSampleSphere);
         body = allocate_rigid_body_from_object(o, &M_Body_Mesh, 3.f, M_Size, FALSE);
+
+        gMarioState->ragdoll = o;
     }
     else {
 
@@ -318,7 +320,7 @@ void bhv_sample_cube_loop(void) {
 
                 o->oBoosting = 10;
                 
-                //rigid_body_add_force(o->rigidBody, originPoint, force, TRUE);
+                o->rigidBody->asleep = 0;
 
                 o->rigidBody->linearVel[0] += 50.0f * gMarioState->floor->normal.x;
                 o->rigidBody->linearVel[1] += 80.0f * gMarioState->floor->normal.y;

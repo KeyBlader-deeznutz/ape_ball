@@ -12,7 +12,7 @@ seq_setmutescale 0
   seq_setvol 127
 #endif
 seq_settempo 120
-seq_initchannels 0x3ff
+seq_initchannels 0x1fff
 seq_startchannel 0, .channel0
 seq_startchannel 1, .channel1
 seq_startchannel 2, .channel2
@@ -23,6 +23,11 @@ seq_startchannel 6, .channel6
 seq_startchannel 7, .channel7
 seq_startchannel 8, .channel38
 seq_startchannel 9, .channel59
+seq_startchannel 10, .channel_NEW
+seq_startchannel 11, .channel_RAGDOLL3
+seq_startchannel 12, .channel_RAGDOLL4
+seq_startchannel 13, .channel_RAGDOLL5
+seq_startchannel 14, .channel_RAGDOLL1
 .seq_loop:
 seq_delay 20000
 seq_jump .seq_loop
@@ -70,6 +75,52 @@ chan_iowriteval 5
 chan_stereoheadseteffects 1
 chan_setdyntable .channel59_table
 chan_jump .main_loop_023589
+
+.channel_NEW:
+chan_largenoteson
+chan_setinstr 0
+chan_setpanmix 127
+chan_setnotepriority 14
+chan_setval 0
+chan_iowriteval 5
+chan_stereoheadseteffects 1
+chan_setdyntable .channel_NEW_table
+chan_jump .main_loop_023589
+
+.channel_NEW_table:
+sound_ref .sound_rdd
+sound_ref .sound_balls
+sound_ref .sound_ragdoll
+
+.sound_ragdoll:
+chan_setbank 11
+chan_setinstr 1
+chan_setlayer 0, .layer_ragdoll
+chan_end
+
+.layer_ragdoll:
+layer_note1 39, 0x13, 110
+layer_end
+
+.sound_balls:
+chan_setbank 11
+chan_setinstr 0
+chan_setlayer 0, .layer_balls
+chan_end
+
+.layer_balls:
+layer_note1 39, 0x19, 110
+layer_end
+
+.sound_rdd:
+chan_setbank 11
+chan_setinstr 0
+chan_setlayer 0, .layer_rdd
+chan_end
+
+.layer_rdd:
+layer_note1 39, 0x13, 60
+layer_end
 
 // Main loop for standard, non-continuous sound effects
 .main_loop_023589:
@@ -2809,6 +2860,7 @@ sound_ref .sound_general_grand_star_jump
 sound_ref .sound_general_boat_rock
 sound_ref .sound_general_vanish_sfx
 sound_ref .sound_menu_enter_hole
+sound_ref .sound_menu_enter_hole
 sound_ref .sound_general_red_coin
 sound_ref .sound_general_birds_fly_away
 sound_ref .sound_general_right_answer
@@ -2817,6 +2869,16 @@ sound_ref .sound_general_boing1
 sound_ref .sound_general_boing2
 sound_ref .sound_general_yoshi_walk
 sound_ref .sound_general_enemy_alert1
+
+.sound_rd11:
+chan_setbank 0
+chan_setinstr 6
+chan_setlayer 0, .layer_rd11
+chan_end
+
+.layer_rd11:
+layer_note1 39, 0x52, 60
+layer_end
 
 .sound_general_activate_cap_switch:
 chan_setbank 5
@@ -7914,6 +7976,109 @@ layer_note0 38, 0x3, 127, 127
 .layer_32BF:
 layer_delay 0x2a
 layer_jump .layer_32B7
+
+
+
+
+
+.channel_RAGDOLL3:
+chan_largenoteson
+chan_setinstr 0
+chan_setpanmix 127
+chan_setnotepriority 14
+chan_setval 0
+chan_iowriteval 5
+chan_stereoheadseteffects 1
+chan_setdyntable .channel_RAGDOLL3_table
+chan_jump .main_loop_023589
+
+.channel_RAGDOLL3_table:
+sound_ref .sound_rd3
+
+.sound_rd3:
+chan_setbank 12
+chan_setinstr 0
+chan_setlayer 0, .layer_rd3
+chan_end
+
+.layer_rd3:
+layer_note1 39, 0x16, 110
+layer_end
+
+
+.channel_RAGDOLL4:
+chan_largenoteson
+chan_setinstr 0
+chan_setpanmix 127
+chan_setnotepriority 14
+chan_setval 0
+chan_iowriteval 5
+chan_stereoheadseteffects 1
+chan_setdyntable .channel_RAGDOLL4_table
+chan_jump .main_loop_023589
+
+.channel_RAGDOLL4_table:
+sound_ref .sound_rd4
+
+.sound_rd4:
+chan_setbank 13
+chan_setinstr 0
+chan_setlayer 0, .layer_rd4
+chan_end
+
+.layer_rd4:
+layer_note1 39, 0x16, 90
+layer_end
+
+
+.channel_RAGDOLL5:
+chan_largenoteson
+chan_setinstr 0
+chan_setpanmix 127
+chan_setnotepriority 14
+chan_setval 0
+chan_iowriteval 5
+chan_stereoheadseteffects 1
+chan_setdyntable .channel_RAGDOLL5_table
+chan_jump .main_loop_023589
+
+.channel_RAGDOLL5_table:
+sound_ref .sound_rd5
+
+.sound_rd5:
+chan_setbank 14
+chan_setinstr 0
+chan_setlayer 0, .layer_rd5
+chan_end
+
+.layer_rd5:
+layer_note1 39, 0x13, 90
+layer_end
+
+
+.channel_RAGDOLL1:
+chan_largenoteson
+chan_setinstr 0
+chan_setpanmix 127
+chan_setnotepriority 14
+chan_setval 0
+chan_iowriteval 5
+chan_stereoheadseteffects 1
+chan_setdyntable .channel_RAGDOLL1_table
+chan_jump .main_loop_023589
+
+.channel_RAGDOLL1_table:
+sound_ref .sound_rd1
+
+.sound_rd1:
+chan_setbank 15
+chan_setinstr 0
+chan_setlayer 0, .layer_rd1
+chan_end
+
+.layer_rd1:
+layer_note1 39, 0x13, 127
+layer_end
 
 .align 2, 0
 .envelope_32C4:

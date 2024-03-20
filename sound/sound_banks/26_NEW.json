@@ -1,0 +1,29 @@
+{
+  "date": "1996-03-19",
+  "sample_bank": "sfx_new",
+  "envelopes": {
+    "envelope0": [
+      [
+        1,
+        32700
+      ],
+      "hang"
+    ]
+  },
+  "instruments": {
+    "inst_balls": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "balls"
+    },
+    "inst_ragdoll": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "ragdoll"
+    }
+  },
+  "instrument_list": [
+    "inst_balls",
+    "inst_ragdoll"
+  ]
+}

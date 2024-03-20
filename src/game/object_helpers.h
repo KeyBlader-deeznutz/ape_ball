@@ -67,6 +67,7 @@ void obj_update_pos_from_parent_transformation(Mat4 mtx, struct Object *obj);
 void create_transformation_from_matrices(Mat4 a0, Mat4 a1, Mat4 a2);
 void obj_set_held_state(struct Object *obj, const BehaviorScript *heldBehavior);
 f32 lateral_dist_between_objects(struct Object *obj1, struct Object *obj2);
+f32 lateral_dist_between_object_and_point(struct Object *obj1, Vec3f point);
 f32 dist_between_objects(struct Object *obj1, struct Object *obj2);
 f32 dist_between_objects_squared(struct Object *obj1, struct Object *obj2);
 void cur_obj_forward_vel_approach_upward(f32 target, f32 increment);

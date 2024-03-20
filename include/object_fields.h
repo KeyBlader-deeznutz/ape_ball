@@ -602,6 +602,11 @@
 #define /*0x104*/ oGoombaBlinkTimer          OBJECT_FIELD_S32(0x1F)
 #define /*0x108*/ oGoombaTurningAwayFromWall OBJECT_FIELD_S32(0x20)
 #define /*0x10C*/ oGoombaRelativeSpeed       OBJECT_FIELD_F32(0x21)
+
+#define /*0x138*/ oLastFrameParentRelativePosVec                         OBJECT_FIELD_F32(O_PARENT_RELATIVE_POS_INDEX)
+#define /*0x138*/ oLastFrameParentRelativePosX                           OBJECT_FIELD_F32(O_PARENT_RELATIVE_POS_X_INDEX)
+#define /*0x13C*/ oLastFrameParentRelativePosY                           OBJECT_FIELD_F32(O_PARENT_RELATIVE_POS_Y_INDEX)
+#define /*0x140*/ oLastFrameParentRelativePosZ                           OBJECT_FIELD_F32(O_PARENT_RELATIVE_POS_Z_INDEX)
 #ifdef FLOOMBAS
 #define /*0x110*/ oIsFloomba OBJECT_FIELD_S32(0x22)
 

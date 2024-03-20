@@ -36,6 +36,11 @@ enum SoundBank {
     SOUND_BANK_MENU,
     SOUND_BANK_GENERAL2,
     SOUND_BANK_OBJ2,
+    SOUND_BANK_NEW,
+    SOUND_BANK_RAGDOLL3,
+    SOUND_BANK_RAGDOLL4,
+    SOUND_BANK_RAGDOLL5,
+    SOUND_BANK_RAGDOLL1,
     SOUND_BANK_COUNT
 };
 
@@ -355,6 +360,7 @@ enum SoundBank {
 #define SOUND_GENERAL_GRAND_STAR_JUMP            /* 0x30740081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x74, 0x00, SOUND_DISCRETE) // unverified
 #define SOUND_GENERAL_BOAT_ROCK                  /* 0x30750081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x75, 0x00, SOUND_DISCRETE) // unverified
 #define SOUND_GENERAL_VANISH_SFX                 /* 0x30762081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x76, 0x20, SOUND_DISCRETE) // unverified
+#define SOUND_RD1                 /* 0x30762081 */ SOUND_ARG_LOAD(SOUND_BANK_GENERAL,  0x77, 0x80, SOUND_DISCRETE) // unverified
 
 /* Environment Sound Effects */
 #define SOUND_ENV_WATERFALL1                     /* 0x40000001 */ SOUND_ARG_LOAD(SOUND_BANK_ENV,      0x00, 0x00, 0) // unverified
@@ -589,4 +595,11 @@ enum SoundBank {
 #define SOUND_OBJ2_BOSS_DIALOG_GRUNT             /* 0x90694081 */ SOUND_ARG_LOAD(SOUND_BANK_OBJ2,     0x69, 0x40, SOUND_DISCRETE)
 #define SOUND_OBJ2_MRI_SPINNING                  /* 0x906B0081 */ SOUND_ARG_LOAD(SOUND_BANK_OBJ2,     0x6B, 0x00, SOUND_DISCRETE)
 
+#define SOUND_NEW_RD1                                             SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x00, 0x80, SOUND_DISCRETE)
+#define SOUND_NEW_BALLS                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x01, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_RAGDOLL                                         SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x02, 0xFF, SOUND_DISCRETE)
+#define SOUND_RAGDOLL3_RD3                                        SOUND_ARG_LOAD(SOUND_BANK_RAGDOLL3, 0x00, 0xFF, SOUND_DISCRETE)
+#define SOUND_RAGDOLL4_RD4                                        SOUND_ARG_LOAD(SOUND_BANK_RAGDOLL4, 0x00, 0xFF, SOUND_DISCRETE)
+#define SOUND_RAGDOLL5_RD5                                        SOUND_ARG_LOAD(SOUND_BANK_RAGDOLL5, 0x00, 0xFF, SOUND_DISCRETE)
+#define SOUND_RAGDOLL1_RD1                                        SOUND_ARG_LOAD(SOUND_BANK_RAGDOLL1, 0x00, 0xFF, SOUND_DISCRETE)
 #endif // SOUNDS_H

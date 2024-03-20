@@ -210,6 +210,13 @@ f32 lateral_dist_between_objects(struct Object *obj1, struct Object *obj2) {
     return sqrtf(sqr(dx) + sqr(dz));
 }
 
+f32 lateral_dist_between_object_and_point(struct Object *obj1, Vec3f point) {
+    register f32 dx = obj1->oPosX - point[0];
+    register f32 dz = obj1->oPosZ - point[2];
+
+    return sqrtf(sqr(dx) + sqr(dz));
+}
+
 f32 dist_between_objects(struct Object *obj1, struct Object *obj2) {
     Vec3f d;
     vec3_diff(d, &obj2->oPosVec, &obj1->oPosVec);
@@ -1096,6 +1103,41 @@ static void cur_obj_move_update_ground_air_flags(UNUSED f32 gravity, f32 bouncin
     o->oMoveFlags &= ~OBJ_MOVE_MASK_IN_WATER;
 }
 
+static void cur_obj_move_update_ground_air_flags_relative_parent(UNUSED f32 gravity, f32 bounciness) {
+    o->oMoveFlags &= ~OBJ_MOVE_BOUNCE;
+
+    if (o->oParentRelativePosY < o->oFloorHeight) {
+        // On the first frame that we touch the ground, set OBJ_MOVE_LANDED.
+        // On subsequent frames, set OBJ_MOVE_ON_GROUND
+        if (!(o->oMoveFlags & OBJ_MOVE_ON_GROUND)) {
+            if (clear_move_flag(&o->oMoveFlags, OBJ_MOVE_LANDED)) {
+                o->oMoveFlags |= OBJ_MOVE_ON_GROUND;
+            } else {
+                o->oMoveFlags |= OBJ_MOVE_LANDED;
+            }
+        }
+
+        o->oParentRelativePosY = o->oFloorHeight;
+
+        if (o->oVelY < 0.0f) {
+            o->oVelY *= bounciness;
+        }
+
+        if (o->oVelY > 5.0f) {
+            //! This overestimates since velY could be > 5 here
+            //! without bounce (e.g. jump into misa).
+            o->oMoveFlags |= OBJ_MOVE_BOUNCE;
+        }
+    } else {
+        o->oMoveFlags &= ~OBJ_MOVE_LANDED;
+        if (clear_move_flag(&o->oMoveFlags, OBJ_MOVE_ON_GROUND)) {
+            o->oMoveFlags |= OBJ_MOVE_LEFT_GROUND;
+        }
+    }
+
+    o->oMoveFlags &= ~OBJ_MOVE_MASK_IN_WATER;
+}
+
 static f32 cur_obj_move_y_and_get_water_level(f32 gravity, f32 buoyancy) {
     o->oVelY += gravity + buoyancy;
     if (o->oVelY < -78.0f) {
@@ -1103,6 +1145,20 @@ static f32 cur_obj_move_y_and_get_water_level(f32 gravity, f32 buoyancy) {
     }
 
     o->oPosY += o->oVelY;
+    if (o->activeFlags & ACTIVE_FLAG_IGNORE_ENV_BOXES) {
+        return FLOOR_LOWER_LIMIT;
+    }
+
+    return find_water_level(o->oPosX, o->oPosZ);
+}
+
+static f32 cur_obj_move_y_and_get_water_level_relative_parent(f32 gravity, f32 buoyancy) {
+    o->oVelY += gravity + buoyancy;
+    if (o->oVelY < -78.0f) {
+        o->oVelY = -78.0f;
+    }
+
+    o->oParentRelativePosY += o->oVelY;
     if (o->activeFlags & ACTIVE_FLAG_IGNORE_ENV_BOXES) {
         return FLOOR_LOWER_LIMIT;
     }
@@ -1167,12 +1223,12 @@ void cur_obj_move_y_relative_parent(f32 gravity, f32 bounciness, f32 buoyancy) {
     }
 
     if (!(o->oMoveFlags & OBJ_MOVE_MASK_IN_WATER)) {
-        waterLevel = cur_obj_move_y_and_get_water_level(gravity, 0.0f);
+        waterLevel = cur_obj_move_y_and_get_water_level_relative_parent(gravity, 0.0f);
         if (o->oParentRelativePosY > waterLevel) {
             //! We only handle floor collision if the object does not enter
             //  water. This allows e.g. coins to clip through floors if they
             //  enter water on the same frame.
-            cur_obj_move_update_ground_air_flags(gravity, bounciness);
+            cur_obj_move_update_ground_air_flags_relative_parent(gravity, bounciness);
         } else {
             o->oMoveFlags |= OBJ_MOVE_ENTERED_WATER;
             o->oMoveFlags &= ~OBJ_MOVE_MASK_ON_GROUND;
@@ -1180,7 +1236,7 @@ void cur_obj_move_y_relative_parent(f32 gravity, f32 bounciness, f32 buoyancy) {
     } else {
         o->oMoveFlags &= ~OBJ_MOVE_ENTERED_WATER;
 
-        waterLevel = cur_obj_move_y_and_get_water_level(gravity, buoyancy);
+        waterLevel = cur_obj_move_y_and_get_water_level_relative_parent(gravity, buoyancy);
         if (o->oParentRelativePosY < waterLevel) {
             cur_obj_move_update_underwater_flags();
         } else {
