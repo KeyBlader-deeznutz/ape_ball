@@ -395,4 +395,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "stage5/collision_header.h"
 
+#include "real_coin/geo_header.h"
+
+
+#include "real_coin/anim_header.h"
 #endif

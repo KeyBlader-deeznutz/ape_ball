@@ -547,5 +547,9 @@ extern const BehaviorScript bhvTestplane[];
 extern const BehaviorScript bhvCutsceneMario[];
 extern const BehaviorScript bhvCutsceneCastle[];
 
+extern const BehaviorScript bhvStageCoin[];
+
 #endif // BEHAVIOR_DATA_H
 
+
+extern const BehaviorScript bhvRotationTester[];

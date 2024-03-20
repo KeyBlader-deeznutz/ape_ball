@@ -40,3 +40,4 @@
 #include "stage3/geo.inc.c"
 #include "stage4/geo.inc.c"
 #include "stage5/geo.inc.c"
+#include "real_coin/geo.inc.c"

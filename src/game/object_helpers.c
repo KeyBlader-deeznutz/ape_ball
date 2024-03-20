@@ -995,6 +995,55 @@ static void cur_obj_move_xz(f32 steepSlopeNormalY, s32 careAboutEdgesAndSteepSlo
     // We are likely trying to move onto a steep upward slope
 }
 
+static void cur_obj_move_xz_relative_parent(f32 steepSlopeNormalY, s32 careAboutEdgesAndSteepSlopes) {
+    struct Surface *intendedFloor;
+
+    f32 intendedX = o->oParentRelativePosX + o->oVelX;
+    f32 intendedZ = o->oParentRelativePosZ + o->oVelZ;
+
+    f32 intendedFloorHeight = find_floor(intendedX, o->oParentRelativePosY, intendedZ, &intendedFloor);
+    f32 deltaFloorHeight = intendedFloorHeight - o->oFloorHeight;
+
+    o->oMoveFlags &= ~OBJ_MOVE_HIT_EDGE;
+
+    if (o->oRoom != -1
+        && intendedFloor != NULL
+        && intendedFloor->room != 0
+        && o->oRoom != intendedFloor->room
+        && intendedFloor->room != 18) {
+        // Don't leave native room
+        return;
+    }
+
+    if (intendedFloorHeight < FLOOR_LOWER_LIMIT_MISC) {
+        // Don't move into OoB
+        o->oMoveFlags |= OBJ_MOVE_HIT_EDGE;
+    } else if (deltaFloorHeight < 5.0f) {
+        if (!careAboutEdgesAndSteepSlopes) {
+            // If we don't care about edges or steep slopes, okay to move
+            o->oParentRelativePosX = intendedX;
+            o->oParentRelativePosZ = intendedZ;
+        } else if (deltaFloorHeight < -50.0f && (o->oMoveFlags & OBJ_MOVE_ON_GROUND)) {
+            // Don't walk off an edge
+            o->oMoveFlags |= OBJ_MOVE_HIT_EDGE;
+        } else if (intendedFloor->normal.y > steepSlopeNormalY) {
+            // Allow movement onto a slope, provided it's not too steep
+            o->oParentRelativePosX = intendedX;
+            o->oParentRelativePosZ = intendedZ;
+        } else {
+            // We are likely trying to move onto a steep downward slope
+            o->oMoveFlags |= OBJ_MOVE_HIT_EDGE;
+        }
+    } else if (intendedFloor->normal.y > steepSlopeNormalY || o->oParentRelativePosY > intendedFloorHeight) {
+        // Allow movement upward, provided either:
+        // - The target floor is flat enough (e.g. walking up stairs)
+        // - We are above the target floor (most likely in the air)
+        o->oParentRelativePosX = intendedX;
+        o->oParentRelativePosZ = intendedZ;
+    }
+    // We are likely trying to move onto a steep upward slope
+}
+
 static void cur_obj_move_update_underwater_flags(void) {
     f32 decelY = (f32)(sqrtf(o->oVelY * o->oVelY) * (o->oDragStrength * 7.0f)) / 100.0L;
 
@@ -1096,6 +1145,50 @@ void cur_obj_move_y(f32 gravity, f32 bounciness, f32 buoyancy) {
                 o->oMoveFlags &= ~OBJ_MOVE_MASK_IN_WATER;
             } else {
                 o->oPosY = waterLevel;
+                o->oVelY = 0.0f;
+                o->oMoveFlags &= ~(OBJ_MOVE_UNDERWATER_OFF_GROUND | OBJ_MOVE_UNDERWATER_ON_GROUND);
+                o->oMoveFlags |= OBJ_MOVE_AT_WATER_SURFACE;
+            }
+        }
+    }
+    COND_BIT((!(o->oMoveFlags & (OBJ_MOVE_MASK_ON_GROUND | OBJ_MOVE_AT_WATER_SURFACE | OBJ_MOVE_UNDERWATER_OFF_GROUND))), o->oMoveFlags, OBJ_MOVE_IN_AIR);
+}
+
+void cur_obj_move_y_relative_parent(f32 gravity, f32 bounciness, f32 buoyancy) {
+    f32 waterLevel;
+
+    o->oMoveFlags &= ~OBJ_MOVE_LEFT_GROUND;
+
+    if (o->oMoveFlags & OBJ_MOVE_AT_WATER_SURFACE) {
+        if (o->oVelY > 5.0f) {
+            o->oMoveFlags &= ~OBJ_MOVE_MASK_IN_WATER;
+            o->oMoveFlags |= OBJ_MOVE_LEAVING_WATER;
+        }
+    }
+
+    if (!(o->oMoveFlags & OBJ_MOVE_MASK_IN_WATER)) {
+        waterLevel = cur_obj_move_y_and_get_water_level(gravity, 0.0f);
+        if (o->oParentRelativePosY > waterLevel) {
+            //! We only handle floor collision if the object does not enter
+            //  water. This allows e.g. coins to clip through floors if they
+            //  enter water on the same frame.
+            cur_obj_move_update_ground_air_flags(gravity, bounciness);
+        } else {
+            o->oMoveFlags |= OBJ_MOVE_ENTERED_WATER;
+            o->oMoveFlags &= ~OBJ_MOVE_MASK_ON_GROUND;
+        }
+    } else {
+        o->oMoveFlags &= ~OBJ_MOVE_ENTERED_WATER;
+
+        waterLevel = cur_obj_move_y_and_get_water_level(gravity, buoyancy);
+        if (o->oParentRelativePosY < waterLevel) {
+            cur_obj_move_update_underwater_flags();
+        } else {
+            if (o->oParentRelativePosY < o->oFloorHeight) {
+                o->oParentRelativePosY = o->oFloorHeight;
+                o->oMoveFlags &= ~OBJ_MOVE_MASK_IN_WATER;
+            } else {
+                o->oParentRelativePosY = waterLevel;
                 o->oVelY = 0.0f;
                 o->oMoveFlags &= ~(OBJ_MOVE_UNDERWATER_OFF_GROUND | OBJ_MOVE_UNDERWATER_ON_GROUND);
                 o->oMoveFlags |= OBJ_MOVE_AT_WATER_SURFACE;
@@ -1453,6 +1546,51 @@ void cur_obj_move_standard(s16 steepSlopeAngleDegrees) {
 
         cur_obj_move_xz(steepSlopeNormalY, careAboutEdgesAndSteepSlopes);
         cur_obj_move_y(gravity, bounciness, buoyancy);
+
+        if (o->oForwardVel < 0.0f) {
+            negativeSpeed = TRUE;
+        }
+        o->oForwardVel = sqrtf(sqr(o->oVelX) + sqr(o->oVelZ));
+        if (negativeSpeed == TRUE) {
+            o->oForwardVel = -o->oForwardVel;
+        }
+    }
+}
+
+void cur_obj_move_standard_relative_parent(s16 steepSlopeAngleDegrees) {
+    f32 gravity = o->oGravity;
+    f32 bounciness = o->oBounciness;
+    f32 buoyancy = o->oBuoyancy;
+    f32 dragStrength = o->oDragStrength;
+    f32 steepSlopeNormalY;
+    s32 careAboutEdgesAndSteepSlopes = FALSE;
+    s32 negativeSpeed = FALSE;
+
+    //! Because some objects allow these active flags to be set but don't
+    //  avoid updating when they are, we end up with "partial" updates, where
+    //  an object's internal state will be updated, but it doesn't move.
+    //  This allows numerous glitches and is typically referred to as
+    //  deactivation (though this term has a different meaning in the code).
+    //  Objects that do this will be marked with //PARTIAL_UPDATE.
+    if (!(o->activeFlags & (ACTIVE_FLAG_FAR_AWAY | ACTIVE_FLAG_IN_DIFFERENT_ROOM))) {
+        if (steepSlopeAngleDegrees < 0) {
+            careAboutEdgesAndSteepSlopes = TRUE;
+            steepSlopeAngleDegrees = -steepSlopeAngleDegrees;
+        }
+        // Optimize for the most commonly used values
+        if (steepSlopeAngleDegrees == 78) {
+            steepSlopeNormalY =  COS78;
+        } else if (steepSlopeAngleDegrees == -78) {
+            steepSlopeNormalY = -COS78;
+        } else {
+            steepSlopeNormalY = coss(DEGREES(steepSlopeAngleDegrees));
+        }
+
+        cur_obj_compute_vel_xz();
+        cur_obj_apply_drag_xz(dragStrength);
+
+        cur_obj_move_xz_relative_parent(steepSlopeNormalY, careAboutEdgesAndSteepSlopes);
+        cur_obj_move_y_relative_parent(gravity, bounciness, buoyancy);
 
         if (o->oForwardVel < 0.0f) {
             negativeSpeed = TRUE;

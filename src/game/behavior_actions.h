@@ -586,3 +586,6 @@ void bhv_cutscene_castle_loop(void);
 
 #endif // BEHAVIOR_ACTIONS_H
 
+
+void bhv_rotation_tester_init(void);
+void bhv_rotation_tester_loop(void);

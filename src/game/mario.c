@@ -1867,6 +1867,7 @@ void init_mario(void) {
     vec3s_set(gMarioState->marioObj->header.gfx.angle, 0, gMarioState->faceAngle[1], 0);
 
     gMarioState->spawnedRagdoll = 0;
+    gGoalFanfare = 0;
 
     Vec3s capPos;
     if (save_file_get_cap_pos(capPos)) {

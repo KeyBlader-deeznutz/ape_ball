@@ -1,0 +1,23 @@
+static const s16 real_coin_anim_ArmatureAction_values[] = {
+	0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0F5C, 0x2000, 0x30A4, 0x4000, 
+	0x5133, 0x60BF, 0x702A, 0x7FFF, 0x8FD5, 0x9F40, 0xAECC, 0xBFFF, 0xD47D, 
+	0xE9A2, 0xF9BF, 0x0000, 
+};
+
+static const u16 real_coin_anim_ArmatureAction_indices[] = {
+	0x0001, 0x0000, 0x0001, 0x0001, 0x0001, 0x0002, 0x0001, 0x0003, 0x0010, 
+	0x0004, 0x0001, 0x0014, 
+};
+
+static const struct Animation real_coin_anim_ArmatureAction = {
+	0,
+	0,
+	0,
+	1,
+	16,
+	ANIMINDEX_NUMPARTS(real_coin_anim_ArmatureAction_indices),
+	real_coin_anim_ArmatureAction_values,
+	real_coin_anim_ArmatureAction_indices,
+	0,
+};
+

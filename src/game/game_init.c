@@ -83,6 +83,9 @@ u8 *gAreaSkyboxEnd[AREA_COUNT];
 u16 sRenderedFramebuffer = 0;
 u16 sRenderingFramebuffer = 0;
 
+u8 gGoalFanfare = 0;
+u8 gFalling = 0;
+
 // Goddard Vblank Function Caller
 void (*gGoddardVblankCallback)(void) = NULL;
 

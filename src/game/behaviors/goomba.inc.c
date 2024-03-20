@@ -319,7 +319,7 @@ void bhv_goomba_update(void) {
         // If this goomba has a spawner and mario moved away from the spawner, unload
         if (o->parentObj != o) {
             if (o->parentObj->oAction == GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED) {
-                obj_mark_for_deletion(o);
+                //obj_mark_for_deletion(o);
             }
         }
 
@@ -364,7 +364,7 @@ void bhv_goomba_update(void) {
             mark_goomba_as_dead();
         }
 
-        cur_obj_move_standard(-78);
+        cur_obj_move_standard_relative_parent(-78);
     } else {
         o->oAnimState = GOOMBA_ANIM_STATE_EYES_CLOSED;
 #ifdef FLOOMBAS

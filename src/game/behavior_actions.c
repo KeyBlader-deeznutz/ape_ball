@@ -237,3 +237,4 @@ void set_obj_anim_with_accel_and_sound(s16 frame1, s16 frame2, s32 sound) {
 #include "behaviors/testplane.inc.c"
 #include "behaviors/cutscene_mario.inc.c"
 #include "behaviors/cutscene_castle.inc.c"
+#include "behaviors/rotation_tester.inc.c"

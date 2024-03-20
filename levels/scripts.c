@@ -130,6 +130,7 @@ const LevelScript level_main_scripts_entry[] = {
 
         LOAD_MODEL_FROM_GEO(MODEL_TESTPLANE,            testplane_geo),
         LOAD_MODEL_FROM_GEO(MODEL_CUTSCENE_MARIO,            cutscene_mario_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_REAL_COIN,            real_coin_geo),
 
         LOAD_MODEL_FROM_GEO(MODEL_STAGE1,            stage1_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE2,            stage2_geo),

@@ -972,6 +972,20 @@ const BehaviorScript bhvCoinFormation[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvStageCoin[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    SET_INT(oBehParams2ndByte, YELLOW_COIN_BP_ONE_COIN),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT)),
+    LOAD_ANIMATIONS(oAnimations, real_coin_anims),
+    ANIMATE(0),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_rotation_tester_init),
+    CALL_NATIVE(bhv_yellow_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_yellow_coin_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvOneCoin[] = {
     BEGIN(OBJ_LIST_LEVEL),
     SET_INT(oBehParams2ndByte, YELLOW_COIN_BP_ONE_COIN),
@@ -5102,12 +5116,12 @@ const BehaviorScript bhvFlyGuy[] = {
 
 const BehaviorScript bhvGoomba[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    DROP_TO_FLOOR(),
+    OR_LONG(oFlags, (OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_goomba_init),
+    CALL_NATIVE(bhv_rotation_tester_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_goomba_update),
     END_LOOP(),
@@ -6131,5 +6145,14 @@ const BehaviorScript bhvCutsceneCastle[] = {
     CALL_NATIVE(bhv_cutscene_castle_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_cutscene_castle_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvRotationTester[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT)),
+    CALL_NATIVE(bhv_rotation_tester_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rotation_tester_loop),
     END_LOOP(),
 };

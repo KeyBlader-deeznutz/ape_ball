@@ -1258,6 +1258,9 @@
 #define /*0x0FC*/ oYoshiChosenHome OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oYoshiTargetYaw  OBJECT_FIELD_S32(0x1E)
 
+//mairo ragdoll
+
+#define /*0x0F4*/ oBoosting OBJECT_FIELD_S32(0x1B)
 
 /*Custom general defines:
 

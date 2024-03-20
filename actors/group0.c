@@ -64,3 +64,6 @@
 #include "stage4/collision.inc.c"
 #include "stage5/model.inc.c"
 #include "stage5/collision.inc.c"
+#include "real_coin/model.inc.c"
+#include "real_coin/anims/data.inc.c"
+#include "real_coin/anims/table.inc.c"

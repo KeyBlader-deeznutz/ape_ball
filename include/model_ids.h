@@ -570,6 +570,8 @@
 #define MODEL_TESTPLANE           0x110
 #define MODEL_CUTSCENE_MARIO           0x111
 
+#define MODEL_REAL_COIN           0x1A0
+
 #define MODEL_STAGE1        0x112
 #define MODEL_STAGE2        0x113
 #define MODEL_STAGE3        0x114
