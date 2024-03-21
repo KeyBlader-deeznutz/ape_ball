@@ -649,6 +649,14 @@ void render_hud(void) {
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
         }
+        else {
+            hudEffectTimer = 0;
+            for (int i = 0; i < 30; i++) {
+                hudEffectPositions[i][0] = 0;
+                hudEffectPositions[i][1] = 0;
+                hudEffectPositions[i][2] = 0;
+            }
+        }
 
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG
         if (gCustomDebugMode) {

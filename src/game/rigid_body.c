@@ -7,6 +7,7 @@
 #include "engine/surface_collision.h"
 #include "engine/surface_load.h"
 #include "src/game/level_update.h"
+#include "src/game/game_init.h"
 
 struct RigidBody gRigidBodies[MAX_RIGID_BODIES];
 
@@ -322,24 +323,25 @@ void vertices_vs_tri_face(Vec3f vertices[], u32 numVertices, struct TriangleInfo
         if (distance <= PENETRATION_MIN_DEPTH || distance >= PENETRATION_MAX_DEPTH) continue;
         if (point_is_in_tri(vertices[i], tri)) {
             add_collision(col, vertices[i], tri->normal, distance);
-
-            u16 rand = random_u16();
-            switch (rand % 180) {
-                case 0:
-                play_sound(SOUND_NEW_RAGDOLL, gMarioState->pos);
-                break;
-                case 1:
-                    play_sound(SOUND_NEW_BALLS, gMarioState->pos);
-                break;
-                case 2:
-                    play_sound(SOUND_RAGDOLL3_RD3, gMarioState->pos);
-                break;
-                case 3:
-                    play_sound(SOUND_RAGDOLL4_RD4, gMarioState->pos);
-                break;
-                case 4:
-                    play_sound(SOUND_RAGDOLL5_RD5, gMarioState->pos);
-                break;
+            if (gGoalFanfare == 0) {
+                u16 rand = random_u16();
+                switch (rand % 180) {
+                    case 0:
+                    play_sound(SOUND_NEW_RAGDOLL, gMarioState->pos);
+                    break;
+                    case 1:
+                        play_sound(SOUND_NEW_BALLS, gMarioState->pos);
+                    break;
+                    case 2:
+                        play_sound(SOUND_RAGDOLL3_RD3, gMarioState->pos);
+                    break;
+                    case 3:
+                        play_sound(SOUND_RAGDOLL4_RD4, gMarioState->pos);
+                    break;
+                    case 4:
+                        play_sound(SOUND_RAGDOLL5_RD5, gMarioState->pos);
+                    break;
+                }
             }
         }
     }

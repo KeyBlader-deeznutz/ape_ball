@@ -4,6 +4,8 @@
 #include "src/audio/external.h"
 #include "src/game/game_init.h"
 #include "src/game/area.h"
+#include "src/game/hud.h"
+#include "src/game/level_update.h"
 
 Vec3f Collider_Size = {37.0f, 20.0f, 25.0f};
 
@@ -280,6 +282,7 @@ void bhv_sample_cube_loop(void) {
     if (o->oBehParams2ndByte == 0) {
         
         if (gChangingLevel != 0) {
+            gHudDisplay.flags &= ~(HUD_DISPLAY_FLAG_STEAMHAPPY);
             deallocate_rigid_body(o->rigidBody);
             obj_mark_for_deletion(o);
             initiate_warp(LEVEL_BOB, gCurrAreaIndex + (gChangingLevel == 1 ? 1 : 0), 0x0A, 0);
@@ -332,10 +335,16 @@ void bhv_sample_cube_loop(void) {
             print_text(100, 120, "GOAL!!!");
             if (o->oTimer == 1) {
                 play_star_fanfare();
+                switch (random_u16() % 1) {
+                    case 0:
+                        gHudDisplay.flags |= HUD_DISPLAY_FLAG_STEAMHAPPY;
+                        play_sound(SOUND_NEW_STEAMHAPPY, gGlobalSoundSource);
+                    break;
+                }
                 gGoalFanfare = 1;
             }
 
-            if (o->oTimer == 5) {
+            if (o->oTimer == 90) {
                 gChangingLevel = 1;
                 gGoalFanfare = 0;
             }
@@ -344,6 +353,20 @@ void bhv_sample_cube_loop(void) {
         else if (o->oAction == 2) {
             if (o->oTimer == 1) {
                 play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 20, 0x00, 0x00, 0x00);
+                switch (random_u16() % 4) {
+                    case 0:
+                        play_sound(SOUND_MARIO_WAAAOOOW, gGlobalSoundSource);
+                    break;
+                    case 1:
+                        play_sound(SOUND_MARIO_ATTACKED, gGlobalSoundSource);
+                    break;
+                    case 2:
+                        play_sound(SOUND_NEW_MARIOSAYSFUCK, gGlobalSoundSource);
+                    break;
+                    case 3:
+                        play_sound(SOUND_NEW_KIRBYSCREAM, gGlobalSoundSource);
+                    break;
+                }
             }
 
             if (o->oTimer == 20) {

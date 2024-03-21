@@ -1711,10 +1711,6 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         gMarioState->spawnedRagdoll = 1;
     }
 
-    if (gGlobalTimer == 30) {
-        gHudDisplay.flags |= HUD_DISPLAY_FLAG_STEAMHAPPY;
-    }
-
     // Updates once per frame:
     vec3f_get_dist_and_lateral_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->lateralSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);

@@ -91,6 +91,39 @@ chan_jump .main_loop_023589
 sound_ref .sound_rdd
 sound_ref .sound_balls
 sound_ref .sound_ragdoll
+sound_ref .sound_steamhappy
+sound_ref .sound_mariosaysfuck
+sound_ref .sound_kirbyscream
+
+.sound_kirbyscream:
+chan_setbank 11
+chan_setinstr 4
+chan_setlayer 0, .layer_kirbyscream
+chan_end
+
+.layer_kirbyscream:
+layer_note1 39, 0x6c, 127
+layer_end
+
+.sound_mariosaysfuck:
+chan_setbank 11
+chan_setinstr 3
+chan_setlayer 0, .layer_mariosaysfuck
+chan_end
+
+.layer_mariosaysfuck:
+layer_note1 39, 0xd9, 127
+layer_end
+
+.sound_steamhappy:
+chan_setbank 11
+chan_setinstr 2
+chan_setlayer 0, .layer_steamhappy
+chan_end
+
+.layer_steamhappy:
+layer_note1 39, 0x337, 127
+layer_end
 
 .sound_ragdoll:
 chan_setbank 11

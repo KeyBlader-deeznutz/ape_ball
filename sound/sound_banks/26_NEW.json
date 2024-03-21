@@ -20,10 +20,28 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "ragdoll"
+    },
+    "inst_steamhappy": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "steamhappy"
+    },
+    "inst_mariosaysfuck": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "mariosaysfuck"
+    },
+    "inst_kirbyscream": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "kirbyscream"
     }
   },
   "instrument_list": [
     "inst_balls",
-    "inst_ragdoll"
+    "inst_ragdoll",
+    "inst_steamhappy",
+    "inst_mariosaysfuck",
+    "inst_kirbyscream"
   ]
 }
