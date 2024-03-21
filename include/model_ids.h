@@ -571,6 +571,8 @@
 #define MODEL_CUTSCENE_MARIO           0x111
 
 #define MODEL_REAL_COIN           0x1A0
+#define MODEL_BOOST_PARTICLE           0x1A1
+#define MODEL_BOOST_RING           0x1A2
 
 #define MODEL_STAGE1        0x112
 #define MODEL_STAGE2        0x113

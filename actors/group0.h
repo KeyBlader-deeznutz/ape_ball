@@ -401,4 +401,8 @@ extern const Gfx white_particle_small_unused_dl[];
 #include "real_coin/anim_header.h"
 #include "steamhappy/header.h"
 
+#include "boost_vertical/geo_header.h"
+
+#include "boost_ring/geo_header.h"
+
 #endif

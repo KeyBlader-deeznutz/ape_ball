@@ -309,7 +309,14 @@ void bhv_sample_cube_loop(void) {
             }
 
             //boost floor
-            if ((gPlayer1Controller->buttonPressed & Z_TRIG) && (gMarioState->floor && gMarioState->floor->type == SURFACE_VERTICAL_BOOST && ((gMarioState->pos[1] - gMarioState->floorHeight) < 200) && gChangingLevel == 0)) {
+            if ((gPlayer1Controller->buttonPressed & Z_TRIG) && (gMarioState->floor && gMarioState->floor->type == SURFACE_VERTICAL_BOOST && ((gMarioState->pos[1] - gMarioState->floorHeight) < 200) && gChangingLevel == 0 && o->oBoosting == 0)) {
+
+                //cap the yvel before applying the force
+                if (o->rigidBody->linearVel[1] > 20) {
+                    o->rigidBody->linearVel[1] = 20; 
+                }
+                
+                play_sound(SOUND_NEW_BOOST_JUMP, o->rigidBody->centerOfMass);
 
                 Vec3f force;
                 force[0] = 100.0f * gMarioState->floor->normal.x;
@@ -328,6 +335,30 @@ void bhv_sample_cube_loop(void) {
                 o->rigidBody->linearVel[0] += 50.0f * gMarioState->floor->normal.x;
                 o->rigidBody->linearVel[1] += 80.0f * gMarioState->floor->normal.y;
                 o->rigidBody->linearVel[2] += 50.0f * gMarioState->floor->normal.z;
+
+                Vec3f nextPos;
+                vec3f_copy(nextPos, o->rigidBody->centerOfMass);
+
+                nextPos[0] += o->rigidBody->linearVel[0];
+                nextPos[1] += o->rigidBody->linearVel[1];
+                nextPos[2] += o->rigidBody->linearVel[2];
+
+                spawn_object_relative(0, 0, 10, 0, o, MODEL_BOOST_RING, bhvBoostRing);
+
+                struct Object *verticalBoost = spawn_object_relative(0, 0, 0, 0, o, MODEL_BOOST_PARTICLE, bhvBoostParticle);
+
+                Vec3f d;
+                d[0] = nextPos[0] - o->rigidBody->centerOfMass[0];
+                d[2] = nextPos[2] - o->rigidBody->centerOfMass[2];
+
+                verticalBoost->oFaceAngleYaw = atan2s(d[2], d[0]);
+                verticalBoost->oMoveAngleYaw = atan2s(d[2], d[0]);
+                obj_turn_toward_position(verticalBoost, nextPos, O_MOVE_ANGLE_PITCH_INDEX, 0x4000);
+                obj_turn_toward_position(verticalBoost, nextPos, O_FACE_ANGLE_PITCH_INDEX, 0x4000);
+
+                verticalBoost->oVelX = o->rigidBody->linearVel[0];
+                verticalBoost->oVelY = o->rigidBody->linearVel[1];
+                verticalBoost->oVelZ = o->rigidBody->linearVel[2];
             }
         }
         //reached the goal

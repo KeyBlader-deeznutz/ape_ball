@@ -16,6 +16,10 @@
                 29430
             ],
             "hang"
+        ],
+        "envelope0": [
+            [1, 32700],
+            "hang"
         ]
     },
     "instruments": {
@@ -23,9 +27,21 @@
             "release_rate": 10,
             "envelope": "envelope",
             "sound": "23_custom_pizza"
+        },
+        "inst1": {
+            "release_rate": 10,
+            "envelope": "envelope0",
+            "sound": "themonkey_L"
+        },
+        "inst2": {
+            "release_rate": 10,
+            "envelope": "envelope0",
+            "sound": "themonkey_R"
         }
     },
     "instrument_list": [
-        "inst0"
+        "inst0",
+        "inst1",
+        "inst2"
     ]
 }

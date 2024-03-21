@@ -35,6 +35,11 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "kirbyscream"
+    },
+    "inst_boost_jump": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "boost_jump"
     }
   },
   "instrument_list": [
@@ -42,6 +47,7 @@
     "inst_ragdoll",
     "inst_steamhappy",
     "inst_mariosaysfuck",
-    "inst_kirbyscream"
+    "inst_kirbyscream",
+    "inst_boost_jump"
   ]
 }

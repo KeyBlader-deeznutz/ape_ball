@@ -68,3 +68,5 @@
 #include "real_coin/anims/data.inc.c"
 #include "real_coin/anims/table.inc.c"
 #include "steamhappy/model.inc.c"
+#include "boost_vertical/model.inc.c"
+#include "boost_ring/model.inc.c"

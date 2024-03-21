@@ -6156,3 +6156,21 @@ const BehaviorScript bhvRotationTester[] = {
         CALL_NATIVE(bhv_rotation_tester_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvBoostParticle[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_boost_particle_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boost_particle_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvBoostRing[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT)),
+    CALL_NATIVE(bhv_boost_ring_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boost_ring_loop),
+    END_LOOP(),
+};

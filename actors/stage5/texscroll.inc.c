@@ -19,14 +19,30 @@ void scroll_stage5_Plane_009_mesh_layer_1_vtx_3() {
 	currentY += deltaY;
 }
 
-void scroll_gfx_mat_stage5_spooky_tiles_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_stage5_spooky_tiles_layer1);
+void scroll_gfx_mat_stage5_b_bricks_vine_001_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_stage5_b_bricks_vine_001_layer1);
 
-	shift_t(mat, 16, PACK_TILESIZE(0, 1));
+	shift_t(mat, 10, PACK_TILESIZE(0, 1));
+
+};
+
+void scroll_gfx_mat_stage5_spooky_tiles_004_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_stage5_spooky_tiles_004_layer1);
+
+	shift_t_down(mat, 16, PACK_TILESIZE(0, 1));
+
+};
+
+void scroll_gfx_mat_stage5_b_bricks_vine_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_stage5_b_bricks_vine_layer1);
+
+	shift_t(mat, 10, PACK_TILESIZE(0, 1));
 
 };
 
 void scroll_actor_geo_stage5() {
 	scroll_stage5_Plane_009_mesh_layer_1_vtx_3();
-	scroll_gfx_mat_stage5_spooky_tiles_layer1();
+	scroll_gfx_mat_stage5_b_bricks_vine_001_layer1();
+	scroll_gfx_mat_stage5_spooky_tiles_004_layer1();
+	scroll_gfx_mat_stage5_b_bricks_vine_layer1();
 };

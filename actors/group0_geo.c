@@ -41,3 +41,5 @@
 #include "stage4/geo.inc.c"
 #include "stage5/geo.inc.c"
 #include "real_coin/geo.inc.c"
+#include "boost_vertical/geo.inc.c"
+#include "boost_ring/geo.inc.c"

@@ -589,3 +589,7 @@ void bhv_cutscene_castle_loop(void);
 
 void bhv_rotation_tester_init(void);
 void bhv_rotation_tester_loop(void);
+void bhv_boost_particle_init(void);
+void bhv_boost_particle_loop(void);
+void bhv_boost_ring_init(void);
+void bhv_boost_ring_loop(void);

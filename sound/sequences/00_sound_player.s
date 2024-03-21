@@ -94,6 +94,17 @@ sound_ref .sound_ragdoll
 sound_ref .sound_steamhappy
 sound_ref .sound_mariosaysfuck
 sound_ref .sound_kirbyscream
+sound_ref .sound_boost_jump
+
+.sound_boost_jump:
+chan_setbank 11
+chan_setinstr 5
+chan_setlayer 0, .layer_boost_jump
+chan_end
+
+.layer_boost_jump:
+layer_note1 39, 0x90, 127
+layer_end
 
 .sound_kirbyscream:
 chan_setbank 11
@@ -112,7 +123,7 @@ chan_setlayer 0, .layer_mariosaysfuck
 chan_end
 
 .layer_mariosaysfuck:
-layer_note1 39, 0xd9, 127
+layer_note1 39, 0xd9, 80
 layer_end
 
 .sound_steamhappy:

@@ -284,6 +284,35 @@ s32 obj_turn_toward_object(struct Object *obj, struct Object *target, s16 angleI
     return targetAngle;
 }
 
+s32 obj_turn_toward_position(struct Object *obj, Vec3f target, s16 angleIndex, s16 turnAmount) {
+    Vec3f d;
+    s16 targetAngle = 0x0;
+    s16 startAngle;
+
+    switch (angleIndex) {
+        case O_MOVE_ANGLE_PITCH_INDEX:
+        case O_FACE_ANGLE_PITCH_INDEX:
+            d[0] = target[0] - obj->oPosX;
+            d[1] = -target[1] + obj->oPosY;
+            d[2] = target[2] - obj->oPosZ;
+
+            targetAngle = atan2s(sqrtf(sqr(d[0]) + sqr(d[2])), d[1]);
+            break;
+
+        case O_MOVE_ANGLE_YAW_INDEX:
+        case O_FACE_ANGLE_YAW_INDEX:
+            d[0] = target[0] - obj->oPosX;
+            d[2] = target[2] - obj->oPosZ;
+
+            targetAngle = atan2s(d[2], d[0]);
+            break;
+    }
+
+    startAngle = o->rawData.asU32[angleIndex];
+    o->rawData.asU32[angleIndex] = approach_s16_symmetric(startAngle, targetAngle, turnAmount);
+    return targetAngle;
+}
+
 void obj_set_parent_relative_pos(struct Object *obj, s16 relX, s16 relY, s16 relZ) {
     obj->oParentRelativePosX = relX;
     obj->oParentRelativePosY = relY;
