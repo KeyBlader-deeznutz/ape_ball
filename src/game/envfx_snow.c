@@ -266,6 +266,34 @@ void envfx_update_snow_blizzard(s32 snowCylinderX, s32 snowCylinderY, s32 snowCy
     gSnowCylinderLastPos[2] = snowCylinderZ;
 }
 
+void envfx_update_steamhappy(s32 snowCylinderX, s32 snowCylinderY, s32 snowCylinderZ) {
+    s32 i;
+    s32 deltaX = snowCylinderX - gSnowCylinderLastPos[0];
+    s32 deltaY = snowCylinderY - gSnowCylinderLastPos[1];
+    s32 deltaZ = snowCylinderZ - gSnowCylinderLastPos[2];
+
+    for (i = 0; i < gSnowParticleCount; i++) {
+        (gEnvFxBuffer + i)->isAlive =
+            envfx_is_snowflake_alive(i, snowCylinderX, snowCylinderY, snowCylinderZ);
+        if (!(gEnvFxBuffer + i)->isAlive) {
+            (gEnvFxBuffer + i)->xPos =
+                400.0f * random_float() - 200.0f + snowCylinderX + (s16)(deltaX * 2);
+            (gEnvFxBuffer + i)->zPos =
+                400.0f * random_float() - 200.0f + snowCylinderZ + (s16)(deltaZ * 2);
+            (gEnvFxBuffer + i)->yPos = 400.0f * random_float() - 200.0f + snowCylinderY;
+            (gEnvFxBuffer + i)->isAlive = TRUE;
+        } else {
+            (gEnvFxBuffer + i)->xPos += random_float() * 2 - 1.0f + (s16)(deltaX / 1.2) + 20.0f;
+            (gEnvFxBuffer + i)->yPos -= 5 -(s16)(deltaY * 0.8);
+            (gEnvFxBuffer + i)->zPos += random_float() * 2 - 1.0f + (s16)(deltaZ / 1.2);
+        }
+    }
+
+    gSnowCylinderLastPos[0] = snowCylinderX;
+    gSnowCylinderLastPos[1] = snowCylinderY;
+    gSnowCylinderLastPos[2] = snowCylinderZ;
+}
+
 /*! Unused function. Checks whether a position is laterally within 3000 units
  *  to the point (x: 3380, z: -520). Considering there is an unused blizzard
  *  snow mode, this could have been used to check whether Mario is in a
@@ -434,6 +462,17 @@ Gfx *envfx_update_snow(s32 snowMode, Vec3s marioPos, Vec3s camFrom, Vec3s camTo)
             pos_from_orbit(camTo, snowCylinderPos, radius, pitch, yaw);
             envfx_update_snow_blizzard(snowCylinderPos[0], snowCylinderPos[1], snowCylinderPos[2]);
             break;
+
+        case 4:
+            if (radius > 250) {
+                radius -= 250;
+            } else {
+                radius = 1;
+            }
+
+            pos_from_orbit(camTo, snowCylinderPos, radius, pitch, yaw);
+            envfx_update_snow_blizzard(snowCylinderPos[0], snowCylinderPos[1], snowCylinderPos[2]);
+            break;
     }
 
     rotate_triangle_vertices((s16 *) &vertex1, (s16 *) &vertex2, (s16 *) &vertex3, pitch, yaw);
@@ -498,6 +537,10 @@ Gfx *envfx_update_particles(s32 mode, Vec3s marioPos, Vec3s camTo, Vec3s camFrom
 
         case ENVFX_SNOW_BLIZZARD:
             gfx = envfx_update_snow(3, marioPos, camFrom, camTo);
+            break;
+
+        case ENVFX_STEAMHAPPY:
+            gfx = envfx_update_snow(4, marioPos, camFrom, camTo);
             break;
 
         default:

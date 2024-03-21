@@ -1711,22 +1711,9 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         gMarioState->spawnedRagdoll = 1;
     }
 
-    if (gGlobalTimer % 30 == 0) {
-        //play_sound(SOUND_NEW_RAGDOLL, gGlobalSoundSource);
+    if (gGlobalTimer == 30) {
+        gHudDisplay.flags |= HUD_DISPLAY_FLAG_STEAMHAPPY;
     }
-    if (gGlobalTimer % 30 == 7) {
-        //play_sound(SOUND_NEW_BALLS, gGlobalSoundSource);
-    }
-    if (gGlobalTimer % 30 == 13) {
-        //play_sound(SOUND_RAGDOLL3_RD3, gGlobalSoundSource);
-    }
-    if (gGlobalTimer % 30 == 20) {
-        //play_sound(SOUND_RAGDOLL4_RD4, gGlobalSoundSource);
-    }
-    if (gGlobalTimer % 30 == 25) {
-        //play_sound(SOUND_RAGDOLL5_RD5, gGlobalSoundSource);
-    }
-
 
     // Updates once per frame:
     vec3f_get_dist_and_lateral_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->lateralSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);

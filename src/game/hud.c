@@ -17,6 +17,7 @@
 #include "engine/math_util.h"
 #include "puppycam2.h"
 #include "puppyprint.h"
+#include "actors/group0.h"
 
 #include "config.h"
 
@@ -518,6 +519,9 @@ void render_hud_camera_status(void) {
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
+Vec3f hudEffectPositions[30];
+s16 hudEffectTimer;
+
 /**
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
@@ -591,6 +595,59 @@ void render_hud(void) {
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {
             render_hud_timer();
+        }
+
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_STEAMHAPPY) {
+
+            if (hudEffectTimer < 30) {
+                hudEffectTimer++;
+            }
+
+            Mtx *mtx = alloc_display_list(sizeof(Mtx));
+
+            if (mtx == NULL) {
+                return;
+            }
+
+            //guTranslate(mtx, (f32) 280, (f32) 200 + comboHeight, 0);
+            
+            gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+            //gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
+            //        G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+
+                    //create_dl_translation_matrix(MENU_MTX_PUSH, 180.0f, 150.0f, 0.0f);
+                    //create_dl_scale_matrix(MENU_MTX_NOPUSH, hudEffectPositions[i][2] / 30.0f, hudEffectPositions[i][2] / 30.0f, 1.0f);
+                    //gSPDisplayList(gDisplayListHead++, &steamhappy_Plane_mesh);
+                //gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+                
+            
+            //since Z isn't used for hud it is instead used as an existence timer.
+            for (int i = 0; i < hudEffectTimer; i++) {
+                if (hudEffectPositions[i][2] < 1) {
+                    hudEffectPositions[i][0] = random_u16() % 320;
+                    hudEffectPositions[i][1] = random_u16() % 60 + 180;
+                    hudEffectPositions[i][2] = 1;
+                }
+                create_dl_translation_matrix(MENU_MTX_PUSH, hudEffectPositions[i][0], hudEffectPositions[i][1], 0);
+                    create_dl_scale_matrix(MENU_MTX_NOPUSH, hudEffectPositions[i][2] / 60.0f, hudEffectPositions[i][2] / 60.0f, 1.0f);
+                    gSPDisplayList(gDisplayListHead++, &steamhappy_Plane_mesh);
+                gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+                if (hudEffectPositions[i][2] < 60) {
+                hudEffectPositions[i][2]++;
+                }
+
+                hudEffectPositions[i][1] -= -8 + hudEffectPositions[i][2];
+
+                if (hudEffectPositions[i][1] < 0.0f) {
+                    hudEffectPositions[i][2] = 0;
+                }
+            }
+
+            //gSPDisplayList(gDisplayListHead++, &combo_meter_Plane_mesh);
+
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
         }
 
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG
