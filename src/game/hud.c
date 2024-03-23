@@ -18,6 +18,7 @@
 #include "puppycam2.h"
 #include "puppyprint.h"
 #include "actors/group0.h"
+#include "src/audio/external.h"
 
 #include "config.h"
 
@@ -645,6 +646,71 @@ void render_hud(void) {
             }
 
             //gSPDisplayList(gDisplayListHead++, &combo_meter_Plane_mesh);
+
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+        }
+        else if (hudDisplayFlags & HUD_DISPLAY_FLAG_THUMBSUP) {
+
+            if (hudEffectTimer < 30) {
+                hudEffectTimer++;
+            }
+
+            Mtx *mtx = alloc_display_list(sizeof(Mtx));
+
+            if (mtx == NULL) {
+                return;
+            }
+            
+            gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+            
+            //since Z isn't used for hud it is instead used as an existence timer.0
+                if (hudEffectPositions[0][2] < 1) {
+                    hudEffectPositions[0][0] = -30;
+                    hudEffectPositions[0][1] = 280;
+                    hudEffectPositions[0][2] = 1;
+                }
+
+                f32 scaleX = 0.5f;
+                f32 scaleY = 0.5f;
+                if (hudEffectPositions[0][1] < 95) {
+                    scaleX += (0.5f * ((95.0f - hudEffectPositions[0][1]) / 60.0f)) * CLAMP((70.0f - hudEffectPositions[0][2]) / 70.0f, 0.0f, 1.0f);
+                    scaleY -= 0.8f*(scaleX - 0.5f) * CLAMP((70.0f - hudEffectPositions[0][2]) / 70.0f, 0.0f, 1.0f);
+                }
+
+                if (hudEffectPositions[0][2] > 60) {
+                    //scaleX = 1.0f - ((hudEffectPositions[0][2] - 60.0f)/90.0f);
+                    //scaleY = CLAMP(((hudEffectPositions[0][2] - 60.0f)/90.0f), 0.1f, 1.0f);
+                }
+                
+
+                create_dl_translation_matrix(MENU_MTX_PUSH, hudEffectPositions[0][0], hudEffectPositions[0][1], 0);
+                    create_dl_scale_matrix(MENU_MTX_NOPUSH, scaleX, 0.5f, 1.0f);
+                    gSPDisplayList(gDisplayListHead++, &thumbsup_Plane_002_mesh);
+                gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+                
+                
+                
+                hudEffectPositions[0][0] += 6.0f - ((f32)hudEffectPositions[0][2] / 16.0f);
+                hudEffectPositions[0][1] += hudEffectPositions[1][2];
+
+                if (hudEffectPositions[0][1] + hudEffectPositions[1][2] < 35) {
+                    hudEffectPositions[1][2] = -hudEffectPositions[1][2] / 1.3f;
+
+                    if (hudEffectPositions[0][2] < 53) {
+                        play_sound(SOUND_GENERAL_MONEYBAG_BOING_LOWPRIO, gGlobalSoundSource);
+                    }
+                }
+                
+                //timer
+                hudEffectPositions[0][2] += 1.0f;
+                //gravity
+                hudEffectPositions[1][2] -= 3.0;
+
+                if (hudEffectPositions[0][1] < 35) {
+                    hudEffectPositions[0][1] = 35;
+                }
 
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 

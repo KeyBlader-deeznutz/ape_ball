@@ -70,3 +70,4 @@
 #include "steamhappy/model.inc.c"
 #include "boost_vertical/model.inc.c"
 #include "boost_ring/model.inc.c"
+#include "thumbsup/model.inc.c"

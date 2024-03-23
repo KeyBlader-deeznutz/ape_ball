@@ -405,4 +405,6 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "boost_ring/geo_header.h"
 
+#include "thumbsup/header.h"
+
 #endif

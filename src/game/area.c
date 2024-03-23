@@ -421,6 +421,24 @@ void render_game(void) {
                       SCREEN_HEIGHT - gBorderHeight);
         gMenuOptSelectIndex = render_menus_and_dialogs();
 
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_GANGNAM) {
+            extern const u8 gangnam_textures_dma[];
+
+            ALIGNED8 static const Texture gangnam_print[] = {
+                #include "actors/amp/gangnam0.rgba16.inc.c"  
+            };
+                
+            dma_read(gangnam_print, ((gGlobalTimer % 123) * 8192) + gangnam_textures_dma, ((gGlobalTimer % 123) * 8192) + gangnam_textures_dma + 8192);
+            gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
+
+            render_multi_image(&gangnam_print, 10, 30, 64, 64, 1, 1, G_CYC_COPY);
+
+            render_multi_image(&gangnam_print, 130, 180, 64, 64, 1, 1, G_CYC_COPY);
+
+            render_multi_image(&gangnam_print, 270, 60, 64, 64, 1, 1, G_CYC_COPY);
+            gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
+        }
+
         if (gMenuOptSelectIndex != 0) {
             gSaveOptSelectIndex = gMenuOptSelectIndex;
         }

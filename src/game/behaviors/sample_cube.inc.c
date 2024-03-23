@@ -282,7 +282,7 @@ void bhv_sample_cube_loop(void) {
     if (o->oBehParams2ndByte == 0) {
         
         if (gChangingLevel != 0) {
-            gHudDisplay.flags &= ~(HUD_DISPLAY_FLAG_STEAMHAPPY);
+            gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
             deallocate_rigid_body(o->rigidBody);
             obj_mark_for_deletion(o);
             initiate_warp(LEVEL_BOB, gCurrAreaIndex + (gChangingLevel == 1 ? 1 : 0), 0x0A, 0);
@@ -366,12 +366,24 @@ void bhv_sample_cube_loop(void) {
             print_text(100, 120, "GOAL!!!");
             if (o->oTimer == 1) {
                 play_star_fanfare();
-                switch (random_u16() % 1) {
-                    case 0:
-                        gHudDisplay.flags |= HUD_DISPLAY_FLAG_STEAMHAPPY;
-                        play_sound(SOUND_NEW_STEAMHAPPY, gGlobalSoundSource);
-                    break;
+                if (gCurrAreaIndex != 1) {
+                    switch (random_u16() % 3) {
+                        case 0:
+                            gHudDisplay.flags |= HUD_DISPLAY_FLAG_STEAMHAPPY;
+                            play_sound(SOUND_NEW_STEAMHAPPY, gGlobalSoundSource);
+                        break;
+                        case 1:
+                            gHudDisplay.flags |= HUD_DISPLAY_FLAG_THUMBSUP;
+                        break;
+                        case 2:
+                            gHudDisplay.flags |= HUD_DISPLAY_FLAG_GANGNAM;
+                        break;
+                    }
                 }
+
+                play_sound(SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16), gGlobalSoundSource);
+
+                gHudDisplay.flags &= ~(HUD_DISPLAY_FLAG_CAMERA_AND_POWER | HUD_DISPLAY_FLAG_COIN_COUNT | HUD_DISPLAY_FLAG_STAR_COUNT);
                 gGoalFanfare = 1;
             }
 

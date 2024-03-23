@@ -510,6 +510,11 @@ SECTIONS
       KEEP(BUILD_DIR/sound/sound_data.o(.data*));
    }
    END_SEG(assets)
+   BEGIN_SEG(dma, __romPos)
+   {
+      KEEP(BUILD_DIR/bin/dma/dma.o(.data*));
+   }
+   END_SEG(dma)
 #ifdef HVQM
    BEGIN_SEG(capcom, __romPos) SUBALIGN(2)
    {
