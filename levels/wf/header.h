@@ -106,4 +106,12 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/stage11/collision_header.h"
 
+#include "levels/wf/stage12/geo_header.h"
+
+#include "levels/wf/stage12/collision_header.h"
+
+#include "levels/wf/stage13/geo_header.h"
+
+#include "levels/wf/stage13/collision_header.h"
+
 #endif

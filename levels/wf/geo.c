@@ -45,3 +45,5 @@
 #include "levels/wf/geo.inc.c"
 
 #include "levels/wf/stage11/geo.inc.c"
+#include "levels/wf/stage12/geo.inc.c"
+#include "levels/wf/stage13/geo.inc.c"

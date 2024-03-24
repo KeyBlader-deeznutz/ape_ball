@@ -18,7 +18,10 @@
             "hang"
         ],
         "envelope0": [
-            [1, 32700],
+            [
+                1,
+                32700
+            ],
             "hang"
         ]
     },
@@ -37,11 +40,23 @@
             "release_rate": 10,
             "envelope": "envelope0",
             "sound": "themonkey_R"
+        },
+        "inst3": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "monkey2_L"
+        },
+        "inst4": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "monkey2_R"
         }
     },
     "instrument_list": [
         "inst0",
         "inst1",
-        "inst2"
+        "inst2",
+        "inst3",
+        "inst4"
     ]
 }

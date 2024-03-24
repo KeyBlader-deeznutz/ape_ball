@@ -1,0 +1,15 @@
+extern const GeoLayout stage13_geo[];
+extern Lights1 stage13_f3dlite_material_lights;
+extern Lights1 stage13_f3dlite_material_010_lights;
+extern u8 stage13_yippeeee_ci8[];
+extern u8 stage13_yippeeee_pal_rgba16[];
+extern u8 stage13_metaltile_i8[];
+extern Vtx stage13_Cube_003_mesh_layer_1_vtx_0[20];
+extern Gfx stage13_Cube_003_mesh_layer_1_tri_0[];
+extern Vtx stage13_Cube_003_mesh_layer_1_vtx_1[268];
+extern Gfx stage13_Cube_003_mesh_layer_1_tri_1[];
+extern Gfx mat_stage13_f3dlite_material[];
+extern Gfx mat_revert_stage13_f3dlite_material[];
+extern Gfx mat_stage13_f3dlite_material_010[];
+extern Gfx stage13_Cube_003_mesh_layer_1[];
+extern Gfx stage13_material_revert_render_settings[];

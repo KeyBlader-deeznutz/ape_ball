@@ -322,7 +322,8 @@ void bhv_sample_cube_loop(void) {
             }
 
             //boost floor
-            if ((gPlayer1Controller->buttonPressed & Z_TRIG) && (gMarioState->floor && gMarioState->floor->type == SURFACE_VERTICAL_BOOST && ((gMarioState->pos[1] - gMarioState->floorHeight) < 200) && gChangingLevel == 0 && o->oBoosting == 0)) {
+            if ((gMarioState->floor->type == SURFACE_AUTO_VERTICAL_BOOST && ((gMarioState->pos[1] - gMarioState->floorHeight) < 200) && gChangingLevel == 0 && o->oBoosting == 0 && o->rigidBody->linearVel[1] > -4.0f)
+            || ((gPlayer1Controller->buttonPressed & Z_TRIG) && (gMarioState->floor && gMarioState->floor->type == SURFACE_VERTICAL_BOOST && ((gMarioState->pos[1] - gMarioState->floorHeight) < 200) && gChangingLevel == 0 && o->oBoosting == 0))) {
 
                 //cap the yvel before applying the force
                 if (o->rigidBody->linearVel[1] > 20) {

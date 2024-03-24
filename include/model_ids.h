@@ -586,6 +586,14 @@
 #define MODEL_STAGE9        0x11A
 #define MODEL_STAGE10        0x11B
 #define MODEL_STAGE11        0x11C
+#define MODEL_STAGE12        0x11D
+#define MODEL_STAGE13        0x11E
+#define MODEL_STAGE14        0x11F
+#define MODEL_STAGE15        0x120
+#define MODEL_STAGE16        0x121
+#define MODEL_STAGE17        0x122
+#define MODEL_STAGE18        0x123
+#define MODEL_STAGE19        0x124
 
 
 // Menu Models (overwrites Level Geometry IDs)

@@ -72,3 +72,7 @@
 
 #include "levels/wf/stage11/model.inc.c"
 #include "levels/wf/stage11/collision.inc.c"
+#include "levels/wf/stage12/model.inc.c"
+#include "levels/wf/stage12/collision.inc.c"
+#include "levels/wf/stage13/model.inc.c"
+#include "levels/wf/stage13/collision.inc.c"

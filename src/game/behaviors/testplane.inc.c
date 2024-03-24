@@ -36,6 +36,12 @@ void bhv_testplane_init(void) {
         case 11:
             obj_set_collision_data(o, stage11_collision);
             break;
+        case 12:
+            obj_set_collision_data(o, stage12_collision);
+            break;
+        case 13:
+            obj_set_collision_data(o, stage13_collision);
+            break;
     }
 }
 

@@ -47,6 +47,7 @@ enum SeqId {
     SEQ_EVENT_CUTSCENE_LAKITU,        // 0x22 (not in JP)
     SEQ_STREAMED_PIZZA,
     SEQ_STREAMED_MONKEY_1,
+    SEQ_STREAMED_MONKEY_2,
     SEQ_COUNT
 };
 
