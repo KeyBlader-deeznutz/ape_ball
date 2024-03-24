@@ -1704,7 +1704,7 @@ void queue_rumble_particles(struct MarioState *m) {
  */
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
-
+    
     if (gCurrLevelNum != LEVEL_CASTLE && gMarioState->spawnedRagdoll == 0) {
         struct Object *b = spawn_object_relative(0, 0, 300, 0, o, MODEL_M_BODY, bhvSampleSphere);
         b->parentObj = NULL;
@@ -1811,6 +1811,8 @@ void init_mario(void) {
     gMarioState->framesSinceB = 0xFF;
 
     gMarioState->invincTimer = 0;
+
+    gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
 
     if (save_file_get_flags()
         & (SAVE_FLAG_CAP_ON_GROUND | SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI

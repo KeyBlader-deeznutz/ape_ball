@@ -1,0 +1,13 @@
+extern const GeoLayout plinko_geo[];
+extern u8 plinko_plinkooutline_rgba16[];
+extern u8 plinko_mariooutline_rgba16[];
+extern Vtx plinko_Plane_020_mesh_layer_5_vtx_0[4];
+extern Gfx plinko_Plane_020_mesh_layer_5_tri_0[];
+extern Vtx plinko_Plane_020_mesh_layer_5_vtx_1[4];
+extern Gfx plinko_Plane_020_mesh_layer_5_tri_1[];
+extern Gfx mat_plinko_f3dlite_material_023[];
+extern Gfx mat_revert_plinko_f3dlite_material_023[];
+extern Gfx mat_plinko_f3dlite_material_022[];
+extern Gfx mat_revert_plinko_f3dlite_material_022[];
+extern Gfx plinko_Plane_020_mesh_layer_5[];
+extern Gfx plinko_material_revert_render_settings[];

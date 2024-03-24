@@ -193,6 +193,7 @@ struct Collision *init_collision(struct RigidBody *body1, struct RigidBody *body
     collision->body1 = body1;
     collision->body2 = body2;
     collision->numPoints = 0;
+    collision->isCeilOrWall = FALSE;
     return collision;
 }
 

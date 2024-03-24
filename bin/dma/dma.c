@@ -252,3 +252,4 @@ ALIGNED8 const u8 gangnam_textures_dma[] = {
     ,
     #include "actors/amp/gangnam123.rgba16.inc.c" 
     };
+

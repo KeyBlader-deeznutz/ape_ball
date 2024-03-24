@@ -1266,6 +1266,9 @@
 //mairo ragdoll
 
 #define /*0x0F4*/ oBoosting OBJECT_FIELD_S32(0x1B)
+#define /*0x0F4*/ oLastVelX OBJECT_FIELD_F32(0x1C)
+#define /*0x0F4*/ oLastVelY OBJECT_FIELD_F32(0x1D)
+#define /*0x0F4*/ oLastVelZ OBJECT_FIELD_F32(0x1E)
 
 /*Custom general defines:
 

@@ -3,3 +3,8 @@
 #include "levels/bob/area_3/geo.inc.c"
 #include "levels/bob/area_4/geo.inc.c"
 #include "levels/bob/area_5/geo.inc.c"
+#include "levels/bob/area_6/geo.inc.c"
+#include "levels/bob/area_7/geo.inc.c"
+#include "levels/bob/area_8/geo.inc.c"
+#include "levels/bob/area_9/geo.inc.c"
+#include "levels/bob/area_10/geo.inc.c"

@@ -593,3 +593,7 @@ void bhv_boost_particle_init(void);
 void bhv_boost_particle_loop(void);
 void bhv_boost_ring_init(void);
 void bhv_boost_ring_loop(void);
+void bhv_view_aligner_init(void);
+void bhv_view_aligner_loop(void);
+void bhv_plinko_text_init(void);
+void bhv_plinko_text_loop(void);

@@ -15,9 +15,15 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "rd3"
+    },
+    "inst_spotlight": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "spotlight"
     }
   },
   "instrument_list": [
-    "inst_rd3"
+    "inst_rd3",
+    "inst_spotlight"
   ]
 }

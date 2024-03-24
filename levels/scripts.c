@@ -133,12 +133,18 @@ const LevelScript level_main_scripts_entry[] = {
         LOAD_MODEL_FROM_GEO(MODEL_REAL_COIN,            real_coin_geo),
         LOAD_MODEL_FROM_GEO(MODEL_BOOST_PARTICLE,            boost_vertical_geo),
         LOAD_MODEL_FROM_GEO(MODEL_BOOST_RING,            boost_ring_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_PLINKO_TEXT,            plinko_geo),
 
         LOAD_MODEL_FROM_GEO(MODEL_STAGE1,            stage1_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE2,            stage2_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE3,            stage3_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE4,            stage4_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE5,            stage5_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_STAGE6,            stage6_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_STAGE7,            stage7_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_STAGE8,            stage8_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_STAGE9,            stage9_geo),
+        LOAD_MODEL_FROM_GEO(MODEL_STAGE10,            stage10_geo),
 #ifdef IA8_30FPS_COINS
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN,             silver_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SILVER_COIN_NO_SHADOW,   silver_coin_no_shadow_geo),

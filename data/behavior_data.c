@@ -6174,3 +6174,21 @@ const BehaviorScript bhvBoostRing[] = {
         CALL_NATIVE(bhv_boost_ring_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvViewAligner[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    CALL_NATIVE(bhv_view_aligner_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_view_aligner_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvPlinkoText[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_plinko_text_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_plinko_text_loop),
+    END_LOOP(),
+};

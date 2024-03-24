@@ -8038,6 +8038,17 @@ chan_jump .main_loop_023589
 
 .channel_RAGDOLL3_table:
 sound_ref .sound_rd3
+sound_ref .sound_spotlight
+
+.sound_spotlight:
+chan_setbank 12
+chan_setinstr 1
+chan_setlayer 0, .layer_spotlight
+chan_end
+
+.layer_spotlight:
+layer_note1 39, 0x6c, 127
+layer_end
 
 .sound_rd3:
 chan_setbank 12

@@ -103,6 +103,7 @@ struct Collision {
     struct RigidBody *body2;
     struct CollisionPoint points[50];
     u32 numPoints;
+    u8 isCeilOrWall;
 };
 
 struct MeshInfo {

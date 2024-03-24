@@ -573,6 +573,7 @@
 #define MODEL_REAL_COIN           0x1A0
 #define MODEL_BOOST_PARTICLE           0x1A1
 #define MODEL_BOOST_RING           0x1A2
+#define MODEL_PLINKO_TEXT           0x1A3
 
 #define MODEL_STAGE1        0x112
 #define MODEL_STAGE2        0x113
@@ -584,6 +585,7 @@
 #define MODEL_STAGE8        0x119
 #define MODEL_STAGE9        0x11A
 #define MODEL_STAGE10        0x11B
+#define MODEL_STAGE11        0x11C
 
 
 // Menu Models (overwrites Level Geometry IDs)

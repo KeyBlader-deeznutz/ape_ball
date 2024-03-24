@@ -555,3 +555,5 @@ extern const BehaviorScript bhvStageCoin[];
 extern const BehaviorScript bhvRotationTester[];
 extern const BehaviorScript bhvBoostParticle[];
 extern const BehaviorScript bhvBoostRing[];
+extern const BehaviorScript bhvViewAligner[];
+extern const BehaviorScript bhvPlinkoText[];

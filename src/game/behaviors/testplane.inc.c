@@ -1,4 +1,5 @@
 #include "actors/group0.h"
+#include "levels/wf/header.h"
 
 void bhv_testplane_init(void) {
     switch (o->oBehParams2ndByte) {
@@ -16,6 +17,24 @@ void bhv_testplane_init(void) {
             break;
         case 5:
             obj_set_collision_data(o, stage5_collision);
+            break;
+        case 6:
+            obj_set_collision_data(o, stage6_collision);
+            break;
+        case 7:
+            obj_set_collision_data(o, stage7_collision);
+            break;
+        case 8:
+            obj_set_collision_data(o, stage8_collision);
+            break;
+        case 9:
+            obj_set_collision_data(o, stage9_collision);
+            break;
+        case 10:
+            obj_set_collision_data(o, stage10_collision);
+            break;
+        case 11:
+            obj_set_collision_data(o, stage11_collision);
             break;
     }
 }

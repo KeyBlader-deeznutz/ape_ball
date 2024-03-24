@@ -1149,8 +1149,20 @@ void mode_8_directions_camera(struct Camera *c) {
         s8DirModeYawOffset = snap_to_45_degrees(s8DirModeYawOffset);
     }
 #endif
+    f32 range;
+    s16 pitch;
 
-    lakitu_zoom(700.f, 0x1500);
+    switch(gCurrAreaIndex) {
+        case 4:
+            range = 1200.f;
+            pitch = 0x1700;
+        break;
+        default:
+            range = 700.f;
+            pitch = 0x1500;
+        break;
+    }
+    lakitu_zoom(range, pitch);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
     c->pos[0] = pos[0];
     c->pos[2] = pos[2];
@@ -6063,6 +6075,9 @@ struct CameraTrigger sCamBBH[] = {
  * Each table is terminated with NULL_TRIGGER
  */
 struct CameraTrigger sCamCastleGrounds[] = {
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamWF[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {

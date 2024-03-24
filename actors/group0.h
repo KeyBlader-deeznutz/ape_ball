@@ -407,4 +407,26 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "thumbsup/header.h"
 
+#include "stage6/geo_header.h"
+
+#include "stage6/collision_header.h"
+
+#include "stage7/geo_header.h"
+
+#include "stage7/collision_header.h"
+
+#include "stage8/geo_header.h"
+
+#include "stage8/collision_header.h"
+
+#include "stage9/geo_header.h"
+
+#include "stage9/collision_header.h"
+
+#include "stage10/geo_header.h"
+
+#include "stage10/collision_header.h"
+
+#include "plinko/geo_header.h"
+
 #endif

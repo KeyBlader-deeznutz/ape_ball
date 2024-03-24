@@ -204,6 +204,8 @@ void bhv_sample_cube_init(void) {
         body = allocate_rigid_body_from_object(o, &M_Body_Mesh, 3.f, M_Size, FALSE);
 
         gMarioState->ragdoll = o;
+
+        
     }
     else {
 
@@ -280,12 +282,23 @@ void bhv_sample_cube_loop(void) {
     
     //main ragdoll processing code happens for the body (basically the main controller)
     if (o->oBehParams2ndByte == 0) {
+
+        if (o->oTimer == 5 && o->oAction == 0) {
+            if (gCurrAreaIndex == 1 && gCurrLevelNum == LEVEL_BOB) {
+                play_sound(SOUND_RAGDOLL3_SPOTLIGHT, gGlobalSoundSource);
+            }
+        }
         
         if (gChangingLevel != 0) {
-            gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
             deallocate_rigid_body(o->rigidBody);
             obj_mark_for_deletion(o);
-            initiate_warp(LEVEL_BOB, gCurrAreaIndex + (gChangingLevel == 1 ? 1 : 0), 0x0A, 0);
+            //warp logic
+            if (gCurrAreaIndex != 10 || gChangingLevel == 0) {
+                initiate_warp(gCurrLevelNum, gCurrAreaIndex + (gChangingLevel == 1 ? 1 : 0), 0x0A, 0);
+            }
+            else if (gCurrLevelNum == LEVEL_BOB) {
+                initiate_warp(LEVEL_WF, 1, 0x0A, 0);
+            }
             gChangingLevel = 0;
             return;
         }
@@ -318,22 +331,18 @@ void bhv_sample_cube_loop(void) {
                 
                 play_sound(SOUND_NEW_BOOST_JUMP, o->rigidBody->centerOfMass);
 
-                Vec3f force;
-                force[0] = 100.0f * gMarioState->floor->normal.x;
-                force[1] = 100.0f * gMarioState->floor->normal.y;
-                force[2] = 100.0f * gMarioState->floor->normal.z;
                 Vec3f originPoint;
 
                 originPoint[0] = gMarioState->pos[0] - gMarioState->floor->normal.x;
                 originPoint[1] = gMarioState->pos[1] - gMarioState->floor->normal.y;
                 originPoint[2] = gMarioState->pos[2] - gMarioState->floor->normal.z;
 
-                o->oBoosting = 10;
+                o->oBoosting = 20;
                 
                 o->rigidBody->asleep = 0;
 
                 o->rigidBody->linearVel[0] += 50.0f * gMarioState->floor->normal.x;
-                o->rigidBody->linearVel[1] += 80.0f * gMarioState->floor->normal.y;
+                o->rigidBody->linearVel[1] += 100.0f * gMarioState->floor->normal.y;
                 o->rigidBody->linearVel[2] += 50.0f * gMarioState->floor->normal.z;
 
                 Vec3f nextPos;
@@ -366,7 +375,7 @@ void bhv_sample_cube_loop(void) {
             print_text(100, 120, "GOAL!!!");
             if (o->oTimer == 1) {
                 play_star_fanfare();
-                if (gCurrAreaIndex != 1) {
+                if (gCurrLevelNum != LEVEL_BOB || gCurrAreaIndex != 1) {
                     switch (random_u16() % 3) {
                         case 0:
                             gHudDisplay.flags |= HUD_DISPLAY_FLAG_STEAMHAPPY;
@@ -447,12 +456,29 @@ void bhv_sample_cube_loop(void) {
             o->rigidBody->linearVel[1] = 20;
         }
     }
-    else if (o->oBoosting > 0) {
+    if (o->oBehParams2ndByte == 0) {
+    //SUUUUPER cowboy code solution to handle mario flying off corners
+    struct Surface *floor;
+    f32 fHeight = find_floor(o->rigidBody->centerOfMass[0], o->rigidBody->centerOfMass[1] + 100, o->rigidBody->centerOfMass[2], &floor);
+    f32 directionMag = sqrtf(sqr(o->rigidBody->linearVel[0] - o->oLastVelX) + sqr(o->rigidBody->linearVel[2] - o->oLastVelZ));
+    if (o->oBoosting == 0 && (directionMag > 3.0f) && o->rigidBody->linearVel[0] > 0.0f && o->rigidBody->centerOfMass[1] - fHeight > 300) {
+        //mario is PROBABLY flying off a corner at this point so destroy his velocity
+        o->rigidBody->linearVel[0] *= 0.8f;
+        o->rigidBody->linearVel[1] *= 0.4f;
+        o->rigidBody->linearVel[2] *= 0.8f;
+    }
+
+    o->oLastVelX = o->rigidBody->linearVel[0];
+    o->oLastVelY = o->rigidBody->linearVel[1];
+    o->oLastVelZ = o->rigidBody->linearVel[2];
+
+    if (o->oBoosting > 0) {
         o->oBoosting--;
     }
 
+
     //set mario's position to the body position
-    if (o->oBehParams2ndByte == 0) {
+    
        gMarioState->pos[0] = o->oPosX;
        gMarioState->pos[1] = o->oPosY;
        gMarioState->pos[2] = o->oPosZ;

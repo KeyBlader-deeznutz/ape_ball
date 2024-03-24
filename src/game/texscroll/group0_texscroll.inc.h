@@ -1,3 +1,8 @@
+#include "actors/stage10/texscroll.inc.h"
+#include "actors/stage9/texscroll.inc.h"
+#include "actors/stage8/texscroll.inc.h"
+#include "actors/stage7/texscroll.inc.h"
+#include "actors/stage6/texscroll.inc.h"
 #include "actors/boost_ring/texscroll.inc.h"
 #include "actors/boost_vertical/texscroll.inc.h"
 #include "actors/stage5/texscroll.inc.h"
