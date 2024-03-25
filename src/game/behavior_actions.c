@@ -242,3 +242,4 @@ void set_obj_anim_with_accel_and_sound(s16 frame1, s16 frame2, s32 sound) {
 #include "behaviors/boost_ring.inc.c"
 #include "behaviors/view_aligner.inc.c"
 #include "behaviors/plinko_text.inc.c"
+#include "behaviors/rotater.inc.c"

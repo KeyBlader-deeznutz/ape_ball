@@ -429,4 +429,6 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "plinko/geo_header.h"
 
+#include "goaltext/header.h"
+
 #endif

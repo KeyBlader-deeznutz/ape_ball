@@ -598,6 +598,28 @@ void render_hud(void) {
             render_hud_timer();
         }
 
+        if (gGoalFanfare == 1) {
+
+            Mtx *mtx = alloc_display_list(sizeof(Mtx));
+
+            if (mtx == NULL) {
+                return;
+            }
+            
+            gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+
+                create_dl_translation_matrix(MENU_MTX_PUSH, 180, 120, 0);
+                    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.5f, 0.5f, 1.0f);
+                    create_dl_rotation_matrix(MENU_MTX_NOPUSH, sins(gGlobalTimer * 0x222), 0, 0, 1.0f);
+                    gSPDisplayList(gDisplayListHead++, &goaltext_Plane_003_mesh);
+                gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+        }
+
+        
+
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_STEAMHAPPY) {
 
             if (hudEffectTimer < 30) {

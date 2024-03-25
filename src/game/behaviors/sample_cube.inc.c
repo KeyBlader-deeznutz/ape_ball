@@ -373,7 +373,6 @@ void bhv_sample_cube_loop(void) {
         }
         //reached the goal
         else if (o->oAction == 1) {
-            print_text(100, 120, "GOAL!!!");
             if (o->oTimer == 1) {
                 play_star_fanfare();
                 if (gCurrLevelNum != LEVEL_BOB || gCurrAreaIndex != 1) {

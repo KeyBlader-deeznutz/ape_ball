@@ -597,3 +597,5 @@ void bhv_view_aligner_init(void);
 void bhv_view_aligner_loop(void);
 void bhv_plinko_text_init(void);
 void bhv_plinko_text_loop(void);
+void bhv_rotater_init(void);
+void bhv_rotater_loop(void);

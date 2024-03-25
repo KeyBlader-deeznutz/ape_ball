@@ -6192,3 +6192,17 @@ const BehaviorScript bhvPlinkoText[] = {
         CALL_NATIVE(bhv_plinko_text_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvRotater[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT)),
+    LOAD_COLLISION_DATA(rotater_collision),
+    SET_FLOAT(oCollisionDistance, 20000),
+    SET_FLOAT(oDrawingDistance, 20000),
+    CALL_NATIVE(bhv_rotater_init),
+    CALL_NATIVE(bhv_rotation_tester_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rotater_loop),
+        
+    END_LOOP(),
+};
