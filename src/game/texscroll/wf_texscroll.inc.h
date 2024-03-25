@@ -1,3 +1,4 @@
+#include "levels/wf/stage14/texscroll.inc.h"
 #include "levels/wf/stage13/texscroll.inc.h"
 #include "levels/wf/stage12/texscroll.inc.h"
 #include "levels/wf/texscroll.inc.h"

@@ -39,8 +39,9 @@ const LevelScript level_wf_entry[] = {
 	JUMP_LINK(script_func_global_2), 
 	JUMP_LINK(script_func_global_15), 
 	LOAD_MODEL_FROM_GEO(MODEL_STAGE11, stage11_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_STAGE12, stage12_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_STAGE12, stage12_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_STAGE13, stage13_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_STAGE14, stage14_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -94,6 +95,31 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 519, 6614, -3015, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		TERRAIN(wf_area_3_collision),
 		MACRO_OBJECTS(wf_area_3_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_STREAMED_MONKEY_2),
+		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
+	AREA(4, wf_area_4),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_BOB, 0x02, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_REAL_COIN, 380, 3239, -729, 0, 0, 0, 0x00000000, bhvStageCoin),
+		OBJECT(MODEL_REAL_COIN, 1107, 3239, 2981, 0, 0, 0, 0x00000000, bhvStageCoin),
+		OBJECT(MODEL_NONE, 1283, 3738, -9730, 0, 0, 0, 0x00000000, bhvViewAligner),
+		OBJECT(MODEL_GOOMBA, 995, -1680, -4309, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_GOOMBA, 739, -1680, 349, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_GOOMBA, 187, -1680, -1760, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_GOOMBA, 208, -1680, -7082, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_GOOMBA, 1265, -1680, 2765, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_GOOMBA, 492, -1680, 4040, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_GOOMBA, 302, -1680, 1698, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_STAGE14, 0, 0, 0, 0, 0, 0, (14 << 16), bhvTestplane),
+		OBJECT(MODEL_NONE, 1283, 3738, -8211, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
+		TERRAIN(wf_area_4_collision),
+		MACRO_OBJECTS(wf_area_4_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_STREAMED_MONKEY_2),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
