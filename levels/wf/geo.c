@@ -50,3 +50,4 @@
 #include "levels/wf/stage14/geo.inc.c"
 #include "levels/wf/rotater/geo.inc.c"
 #include "levels/wf/stage15/geo.inc.c"
+#include "levels/wf/stage16/geo.inc.c"

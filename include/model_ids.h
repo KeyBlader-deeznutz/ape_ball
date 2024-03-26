@@ -575,6 +575,7 @@
 #define MODEL_BOOST_RING           0x1A2
 #define MODEL_PLINKO_TEXT           0x1A3
 #define MODEL_ROTATER           0x1A4
+#define MODEL_MARIOCAR           0x1A5
 
 #define MODEL_STAGE1        0x112
 #define MODEL_STAGE2        0x113

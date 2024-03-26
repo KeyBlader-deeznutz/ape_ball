@@ -6206,3 +6206,14 @@ const BehaviorScript bhvRotater[] = {
         
     END_LOOP(),
 };
+
+const BehaviorScript bhvMarioCar[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, car_anims),
+    ANIMATE(0),
+    CALL_NATIVE(bhv_mario_car_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mario_car_loop),
+    END_LOOP(),
+};

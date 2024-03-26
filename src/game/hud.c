@@ -599,22 +599,29 @@ void render_hud(void) {
         }
 
         if (gGoalFanfare == 1) {
+            Mtx *mtx;
+            Mtx *rmtx;
 
-            Mtx *mtx = alloc_display_list(sizeof(Mtx));
+            mtx = alloc_display_list(sizeof(*mtx));
 
             if (mtx == NULL) {
                 return;
             }
-            
-            gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
-                create_dl_translation_matrix(MENU_MTX_PUSH, 180, 120, 0);
-                    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.5f, 0.5f, 1.0f);
-                    create_dl_rotation_matrix(MENU_MTX_NOPUSH, sins(gGlobalTimer * 0x222), 0, 0, 1.0f);
-                    gSPDisplayList(gDisplayListHead++, &goaltext_Plane_003_mesh);
-                gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+            rmtx = alloc_display_list(sizeof(*rmtx));
 
-            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+            if (rmtx == NULL) {
+                return;
+            }
+
+            guTranslate(mtx, (f32) 160, (f32) 120, 0);
+            gDPSetRenderMode(gDisplayListHead++,G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+
+            gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+            guRotate(rmtx, 45*sins(gGlobalTimer * 0x222), 0.0f, 0.0f, 1.0f);
+            gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(rmtx++),G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_NOPUSH);
+            gSPDisplayList(gDisplayListHead++, &goaltext_Plane_003_mesh);
+            gSPPopMatrix(gDisplayListHead++, 0);
 
         }
 
@@ -631,17 +638,8 @@ void render_hud(void) {
             if (mtx == NULL) {
                 return;
             }
-
-            //guTranslate(mtx, (f32) 280, (f32) 200 + comboHeight, 0);
             
             gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
-            //gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
-            //        G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-
-                    //create_dl_translation_matrix(MENU_MTX_PUSH, 180.0f, 150.0f, 0.0f);
-                    //create_dl_scale_matrix(MENU_MTX_NOPUSH, hudEffectPositions[i][2] / 30.0f, hudEffectPositions[i][2] / 30.0f, 1.0f);
-                    //gSPDisplayList(gDisplayListHead++, &steamhappy_Plane_mesh);
-                //gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
                 
             
             //since Z isn't used for hud it is instead used as an existence timer.
@@ -698,11 +696,6 @@ void render_hud(void) {
                 if (hudEffectPositions[0][1] < 95) {
                     scaleX += (0.5f * ((95.0f - hudEffectPositions[0][1]) / 60.0f)) * CLAMP((70.0f - hudEffectPositions[0][2]) / 70.0f, 0.0f, 1.0f);
                     scaleY -= 0.8f*(scaleX - 0.5f) * CLAMP((70.0f - hudEffectPositions[0][2]) / 70.0f, 0.0f, 1.0f);
-                }
-
-                if (hudEffectPositions[0][2] > 60) {
-                    //scaleX = 1.0f - ((hudEffectPositions[0][2] - 60.0f)/90.0f);
-                    //scaleY = CLAMP(((hudEffectPositions[0][2] - 60.0f)/90.0f), 0.1f, 1.0f);
                 }
                 
 

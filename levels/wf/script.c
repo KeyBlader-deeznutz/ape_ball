@@ -43,6 +43,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_STAGE13, stage13_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_STAGE14, stage14_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_STAGE15, stage15_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_STAGE16, stage16_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ROTATER, rotater_geo), 
 
 	/* Fast64 begin persistent block [level commands] */

@@ -393,7 +393,7 @@ void bhv_goomba_update(void) {
         }
         
 
-        if (gMarioState->ragdoll && lateral_dist_between_object_and_point(o, gMarioState->ragdoll->rigidBody->centerOfMass) < 150.0f && o->oTimer > 5) {
+        if (gMarioState->ragdoll && lateral_dist_between_object_and_point(o, gMarioState->ragdoll->rigidBody->centerOfMass) < 150.0f && absf(gMarioState->pos[1] - o->oPosY) < 200.0f && o->oTimer > 5) {
             struct Object *body = gMarioState->ragdoll;
             s16 angle = atan2s(o->oPosZ - gMarioState->ragdoll->rigidBody->centerOfMass[2], o->oPosX - gMarioState->ragdoll->rigidBody->centerOfMass[0]);
             body->rigidBody->asleep = 0;

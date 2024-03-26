@@ -558,3 +558,4 @@ extern const BehaviorScript bhvBoostRing[];
 extern const BehaviorScript bhvViewAligner[];
 extern const BehaviorScript bhvPlinkoText[];
 extern const BehaviorScript bhvRotater[];
+extern const BehaviorScript bhvMarioCar[];

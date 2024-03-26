@@ -599,3 +599,5 @@ void bhv_plinko_text_init(void);
 void bhv_plinko_text_loop(void);
 void bhv_rotater_init(void);
 void bhv_rotater_loop(void);
+void bhv_mario_car_init(void);
+void bhv_mario_car_loop(void);

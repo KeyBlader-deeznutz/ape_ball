@@ -82,3 +82,5 @@
 #include "levels/wf/rotater/collision.inc.c"
 #include "levels/wf/stage15/model.inc.c"
 #include "levels/wf/stage15/collision.inc.c"
+#include "levels/wf/stage16/model.inc.c"
+#include "levels/wf/stage16/collision.inc.c"
