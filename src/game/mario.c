@@ -1711,6 +1711,10 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         gMarioState->spawnedRagdoll = 1;
     }
 
+    if (gMarioState->numCoins == 60 && gMarioState->numStars == 0) {
+        bhv_spawn_star_no_level_exit(STAR_BP_ACT_100_COINS);
+    }
+
     // Updates once per frame:
     vec3f_get_dist_and_lateral_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->lateralSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
     vec3f_copy(gMarioState->prevPos, gMarioState->pos);
@@ -1813,6 +1817,8 @@ void init_mario(void) {
     gMarioState->invincTimer = 0;
 
     gHudDisplay.flags = HUD_DISPLAY_DEFAULT;
+
+    
 
     if (save_file_get_flags()
         & (SAVE_FLAG_CAP_ON_GROUND | SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI

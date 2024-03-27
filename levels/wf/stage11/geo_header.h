@@ -10,7 +10,7 @@ extern u8 stage11_yippeeee_ci8[];
 extern u8 stage11_yippeeee_pal_rgba16[];
 extern Vtx stage11_Cube_mesh_layer_1_vtx_0[106];
 extern Gfx stage11_Cube_mesh_layer_1_tri_0[];
-extern Vtx stage11_Cube_mesh_layer_1_vtx_1[56];
+extern Vtx stage11_Cube_mesh_layer_1_vtx_1[75];
 extern Gfx stage11_Cube_mesh_layer_1_tri_1[];
 extern Vtx stage11_Cube_mesh_layer_1_vtx_2[8];
 extern Gfx stage11_Cube_mesh_layer_1_tri_2[];

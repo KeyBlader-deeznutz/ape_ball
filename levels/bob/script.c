@@ -84,6 +84,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_REAL_COIN, -5071, 1717, 158, 0, 0, 0, 0x00000000, bhvStageCoin),
 		OBJECT(MODEL_REAL_COIN, -2435, 1159, 390, 0, 0, 0, 0x00000000, bhvStageCoin),
 		OBJECT(MODEL_REAL_COIN, -1761, 600, -373, 0, 0, 0, 0x00000000, bhvStageCoin),
+		OBJECT(MODEL_NONE, -5048, 2713, 2161, 0, 0, 0, 0x00000000, bhvViewAligner),
 		OBJECT(MODEL_STAGE3, 0, 0, 0, 0, 0, 0, (3 << 16), bhvTestplane),
 		OBJECT(MODEL_NONE, -5048, 2923, 1719, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		TERRAIN(bob_area_3_collision),

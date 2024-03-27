@@ -978,7 +978,7 @@ const BehaviorScript bhvStageCoin[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT)),
     LOAD_ANIMATIONS(oAnimations, real_coin_anims),
     ANIMATE(0),
-    CALL_NATIVE(bhv_init_room),
+    //SET_INT(oDrawingDistance, 20000),
     CALL_NATIVE(bhv_rotation_tester_init),
     CALL_NATIVE(bhv_yellow_coin_init),
     BEGIN_LOOP(),

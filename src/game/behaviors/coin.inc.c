@@ -1,5 +1,7 @@
 // coin.inc.c
 
+#include "src/game/game_init.h"
+
 struct ObjectHitbox sYellowCoinHitbox = {
     /* interactType:      */ INTERACT_COIN,
     /* downOffset:        */ 0,
@@ -36,6 +38,7 @@ s32 bhv_coin_sparkles_init(void) {
     if (o->oDistanceToMario < 150 || (o->oInteractStatus & INT_STATUS_INTERACTED
         && !(o->oInteractStatus & INT_STATUS_TOUCHED_BOB_OMB))) {
             gMarioState->numCoins += o->oDamageOrCoinValue;
+            gNumAreaCoinsCollected += o->oDamageOrCoinValue;
         spawn_object(o, MODEL_SPARKLES, bhvCoinSparklesSpawner);
         obj_mark_for_deletion(o);
         return TRUE;

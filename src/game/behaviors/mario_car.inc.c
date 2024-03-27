@@ -69,7 +69,7 @@ if (o->oTimer < 30) {
     }
     else if (o->oTimer < 580) {
         print_small_text_buffered(40, 170, "Playtesters:", PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
-        print_small_text_buffered(60, 190, "KeyBlader, you probably", PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+        print_small_text_buffered(60, 190, "KeyBlader, Arthurtilly, Rovert, Cheezepin", PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
     }
     
 }

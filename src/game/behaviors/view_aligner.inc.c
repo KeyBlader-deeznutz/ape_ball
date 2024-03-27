@@ -1,9 +1,13 @@
 #include "src/game/level_update.h"
+#include "src/game/game_init.h"
 
 void bhv_view_aligner_init(void) {
     s16 angle = atan2s(o->oPosZ - gMarioState->pos[2], o->oPosX - gMarioState->pos[0]);
     extern s16 s8DirModeYawOffset;
     s8DirModeYawOffset = angle;
+
+    gNumCoinsInArea = count_objects_with_behavior(bhvStageCoin);
+    gNumAreaCoinsCollected = 0;
 
 }
 

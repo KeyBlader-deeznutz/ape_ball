@@ -56,6 +56,9 @@ extern u8 *gAreaSkyboxStart[AREA_COUNT];
 extern u8 *gAreaSkyboxEnd[AREA_COUNT];
 extern u8 gGoalFanfare;
 extern u8 gFalling;
+extern u8 gNumCoinsInArea;
+extern u8 gNumAreaCoinsCollected;
+
 #ifdef EEP
 extern s8 gEepromProbe;
 #endif

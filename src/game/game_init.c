@@ -87,6 +87,9 @@ u16 sRenderingFramebuffer = 0;
 u8 gGoalFanfare = 0;
 u8 gFalling = 0;
 
+u8 gNumCoinsInArea = 0;
+u8 gNumAreaCoinsCollected = 0;
+
 // Goddard Vblank Function Caller
 void (*gGoddardVblankCallback)(void) = NULL;
 
