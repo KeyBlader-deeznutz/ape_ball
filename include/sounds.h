@@ -602,6 +602,7 @@ enum SoundBank {
 #define SOUND_NEW_MARIOSAYSFUCK                                   SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x04, 0xFF, SOUND_DISCRETE)
 #define SOUND_NEW_KIRBYSCREAM                                     SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x05, 0xFF, SOUND_DISCRETE)
 #define SOUND_NEW_BOOST_JUMP                                      SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x06, 0xFF, SOUND_DISCRETE)
+#define SOUND_NEW_CRASH                                           SOUND_ARG_LOAD(SOUND_BANK_NEW, 0x07, 0xFF, SOUND_DISCRETE)
 #define SOUND_RAGDOLL3_RD3                                        SOUND_ARG_LOAD(SOUND_BANK_RAGDOLL3, 0x00, 0x80, SOUND_DISCRETE)
 #define SOUND_RAGDOLL3_SPOTLIGHT                                  SOUND_ARG_LOAD(SOUND_BANK_RAGDOLL3, 0x01, 0xFF, SOUND_DISCRETE)
 #define SOUND_RAGDOLL4_RD4                                        SOUND_ARG_LOAD(SOUND_BANK_RAGDOLL4, 0x00, 0x80, SOUND_DISCRETE)

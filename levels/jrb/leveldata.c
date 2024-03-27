@@ -44,3 +44,7 @@
 #include "levels/jrb/car/anims/data.inc.c"
 #include "levels/jrb/car/anims/table.inc.c"
 #include "levels/jrb/leveldata.inc.c"
+
+#include "levels/jrb/the_contraption/model.inc.c"
+#include "levels/jrb/the_contraption/anims/data.inc.c"
+#include "levels/jrb/the_contraption/anims/table.inc.c"

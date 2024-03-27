@@ -50,6 +50,11 @@
             "release_rate": 10,
             "envelope": "envelope",
             "sound": "monkey2_R"
+        },
+        "inst5": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "26_custom_title_screen"
         }
     },
     "instrument_list": [
@@ -57,6 +62,7 @@
         "inst1",
         "inst2",
         "inst3",
-        "inst4"
+        "inst4",
+        "inst5"
     ]
 }

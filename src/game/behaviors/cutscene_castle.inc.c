@@ -8,7 +8,7 @@ void bhv_cutscene_castle_init(void) {
 
 void bhv_cutscene_castle_loop(void) {
 
-    if (o->oTimer > 2) {
+    if (o->oTimer > 0) {
     gCamera->cutscene = 1;
     gMarioState->action = ACT_WAITING_FOR_DIALOG;
     gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_NONE];

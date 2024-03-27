@@ -136,5 +136,8 @@
     ],
     "25_custom_monkey_2": [
         "streamed_audio"
+    ],
+    "26_custom_title_screen": [
+        "streamed_audio"
     ]
 }

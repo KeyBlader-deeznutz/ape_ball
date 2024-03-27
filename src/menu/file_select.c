@@ -383,6 +383,11 @@ void bhv_menu_button_init(void) {
  * object scale for each button.
  */
 void bhv_menu_button_loop(void) {
+
+    if (obj_has_model(o, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON)) {
+        return;
+    }
+
     switch (gCurrentObject->oMenuButtonState) {
         case MENU_BUTTON_STATE_DEFAULT: // Button state
             gCurrentObject->oMenuButtonOrigPosZ = gCurrentObject->oPosZ;
@@ -456,7 +461,7 @@ static const Vec3s sSaveFileButtonPositions[] = {
 
 #define SPAWN_FILE_SELECT_FILE_BUTTON(parent, saveFile)                                                 \
     spawn_object_rel_with_rot((parent),                                                                 \
-    (save_file_exists(saveFile) ? MODEL_MAIN_MENU_MARIO_SAVE_BUTTON : MODEL_MAIN_MENU_MARIO_NEW_BUTTON),\
+    (saveFile == 0 ? MODEL_MAIN_MENU_MARIO_SAVE_BUTTON : MODEL_MAIN_MENU_MARIO_NEW_BUTTON),\
     bhvMenuButton,                                                                                      \
     sSaveFileButtonPositions[saveFile][0],                                                              \
     sSaveFileButtonPositions[saveFile][1],                                                              \
@@ -987,10 +992,10 @@ void load_erase_menu_from_submenu(s16 prevMenuButtonID, struct Object *sourceBut
 
 
 static const Vec3s sSaveFileButtonInitPositions[] = {
-    { -6400, 2800, 0 }, // SAVE_FILE_A
-    {  1500, 2800, 0 }, // SAVE_FILE_B
-    { -6400,    0, 0 }, // SAVE_FILE_C
-    {  1500,    0, 0 }, // SAVE_FILE_D
+    { 0, -4800, 0 }, // SAVE_FILE_A
+    { 0, -4800, 0 }, // SAVE_FILE_B
+    { 0, -4800, 0 }, // SAVE_FILE_C
+    { 0, -4800, 0 }, // SAVE_FILE_D
 };
 
 #define SPAWN_FILE_SELECT_FILE_BUTTON_INIT(saveFile)                                                                                            \
@@ -1013,32 +1018,32 @@ void bhv_menu_button_manager_init(void) {
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_A]->oMenuButtonScale = 1.0f;
     // File B
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_B] = SPAWN_FILE_SELECT_FILE_BUTTON_INIT(SAVE_FILE_B);
-    sMainMenuButtons[MENU_BUTTON_PLAY_FILE_B]->oMenuButtonScale = 1.0f;
+    sMainMenuButtons[MENU_BUTTON_PLAY_FILE_B]->oMenuButtonScale = 0.2f;
     // File C
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C] = SPAWN_FILE_SELECT_FILE_BUTTON_INIT(SAVE_FILE_C);
-    sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C]->oMenuButtonScale = 1.0f;
+    sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C]->oMenuButtonScale = 0.2f;
     // File D
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_D] = SPAWN_FILE_SELECT_FILE_BUTTON_INIT(SAVE_FILE_D);
-    sMainMenuButtons[MENU_BUTTON_PLAY_FILE_D]->oMenuButtonScale = 1.0f;
+    sMainMenuButtons[MENU_BUTTON_PLAY_FILE_D]->oMenuButtonScale = 0.2f;
     // Score menu button
     sMainMenuButtons[MENU_BUTTON_SCORE] =
         spawn_object_rel_with_rot(o, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON,
-                                  bhvMenuButton, -6400, -3500, 0, 0x0, 0x0, 0x0);
+                                  bhvMenuButton, 0, 2000, 0, 0x0, 0x0, 0x0);
     sMainMenuButtons[MENU_BUTTON_SCORE]->oMenuButtonScale = 1.0f;
     // Copy menu button
     sMainMenuButtons[MENU_BUTTON_COPY] =
         spawn_object_rel_with_rot(o, MODEL_MAIN_MENU_BLUE_COPY_BUTTON,
-                                  bhvMenuButton, -2134, -3500, 0, 0x0, 0x0, 0x0);
+                                  bhvMenuButton, -20134, -3500, 0, 0x0, 0x0, 0x0);
     sMainMenuButtons[MENU_BUTTON_COPY]->oMenuButtonScale = 1.0f;
     // Erase menu button
     sMainMenuButtons[MENU_BUTTON_ERASE] =
         spawn_object_rel_with_rot(o, MODEL_MAIN_MENU_RED_ERASE_BUTTON,
-                                  bhvMenuButton,  2134, -3500, 0, 0x0, 0x0, 0x0);
+                                  bhvMenuButton,  20134, -3500, 0, 0x0, 0x0, 0x0);
     sMainMenuButtons[MENU_BUTTON_ERASE]->oMenuButtonScale = 1.0f;
     // Sound mode menu button (Option Mode in EU)
     sMainMenuButtons[MENU_BUTTON_SOUND_MODE] =
         spawn_object_rel_with_rot(o, MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON,
-                                  bhvMenuButton,  6400, -3500, 0, 0x0, 0x0, 0x0);
+                                  bhvMenuButton,  60400, -30500, 0, 0x0, 0x0, 0x0);
     sMainMenuButtons[MENU_BUTTON_SOUND_MODE]->oMenuButtonScale = 1.0f;
 
     sTextBaseAlpha = 0;
@@ -1064,6 +1069,10 @@ void check_main_menu_clicked_buttons(void) {
         for (buttonID = MENU_BUTTON_MAIN_MIN; buttonID < MENU_BUTTON_MAIN_MAX; buttonID++) {
             s16 buttonX = sMainMenuButtons[buttonID]->oPosX;
             s16 buttonY = sMainMenuButtons[buttonID]->oPosY;
+
+            if (buttonID == MENU_BUTTON_SCORE) {
+                continue;
+            }
 
             if (check_clicked_button(buttonX, buttonY, 200.0f)) {
                 // If menu button clicked, select it
@@ -1977,7 +1986,8 @@ void print_save_file_scores(s8 fileIndex) {
 void print_file_select_strings(void) {
     create_dl_ortho_matrix();
     switch (sSelectedButtonID) {
-        case MENU_BUTTON_NONE:         print_main_menu_strings();                               break;
+        case MENU_BUTTON_NONE:         //print_main_menu_strings();                               
+        break;
         case MENU_BUTTON_SCORE:        print_score_menu_strings(); sScoreFileCoinScoreMode = 0; break;
         case MENU_BUTTON_COPY:         print_copy_menu_strings();                               break;
         case MENU_BUTTON_ERASE:        print_erase_menu_strings();                              break;

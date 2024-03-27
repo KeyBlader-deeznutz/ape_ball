@@ -35,6 +35,7 @@ extern OSContStatus gControllerStatuses[MAXCONTROLLERS];
 extern OSContPadEx gControllerPads[MAXCONTROLLERS];
 extern OSMesgQueue gGameVblankQueue;
 extern OSMesgQueue gGfxVblankQueue;
+extern u8 gSlowdownCount;
 extern OSMesg gGameMesgBuf[1];
 extern OSMesg gGfxMesgBuf[1];
 extern struct VblankHandler gGameVblankHandler;

@@ -14,7 +14,7 @@ void bhv_rotater_loop(void) {
     struct Surface *floor;
     f32 height = find_floor(gMarioState->pos[0], gMarioState->pos[1] + 4000, gMarioState->pos[2], &floor);
 
-    if (floor && floor->object && gMarioState->pos[1] - height < 500 && marioRigidBodyObj->oBoosting == 0 && floor->object == o) {
+    if (floor && floor->object && gMarioState->pos[1] - height < 400 && marioRigidBodyObj->oBoosting == 0 && floor->object == o) {
 
         gMarioState->floor = floor;
 

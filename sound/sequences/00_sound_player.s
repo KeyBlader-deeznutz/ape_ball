@@ -95,6 +95,17 @@ sound_ref .sound_steamhappy
 sound_ref .sound_mariosaysfuck
 sound_ref .sound_kirbyscream
 sound_ref .sound_boost_jump
+sound_ref .sound_crash
+
+.sound_crash:
+chan_setbank 11
+chan_setinstr 6
+chan_setlayer 0, .layer_crash
+chan_end
+
+.layer_crash:
+layer_note1 39, 0xa0, 127
+layer_end
 
 .sound_boost_jump:
 chan_setbank 11

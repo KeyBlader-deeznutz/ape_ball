@@ -36,6 +36,8 @@ const LevelScript level_intro_splash_screen[] = {
 #if defined(FLOOMBAS) && defined(INTRO_FLOOMBAS)
     LOAD_COMMON0(),
 
+    JUMP(script_intro_file_select),
+
     // Load "Super Mario 64" logo
     ALLOC_LEVEL_POOL(),
     LOAD_MODEL_FROM_GEO(MODEL_GOOMBA, goomba_geo),

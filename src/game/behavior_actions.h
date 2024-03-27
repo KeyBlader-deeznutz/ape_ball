@@ -601,3 +601,5 @@ void bhv_rotater_init(void);
 void bhv_rotater_loop(void);
 void bhv_mario_car_init(void);
 void bhv_mario_car_loop(void);
+void bhv_the_contraption_init(void);
+void bhv_the_contraption_loop(void);

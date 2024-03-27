@@ -70,4 +70,8 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/header.inc.h"
 
+#include "levels/jrb/the_contraption/geo_header.h"
+
+#include "levels/jrb/the_contraption/anim_header.h"
+
 #endif

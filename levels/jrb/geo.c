@@ -24,3 +24,5 @@
 
 #include "levels/jrb/car/geo.inc.c"
 #include "levels/jrb/geo.inc.c"
+
+#include "levels/jrb/the_contraption/geo.inc.c"

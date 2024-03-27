@@ -40,6 +40,11 @@
       "release_rate": 208,
       "envelope": "envelope0",
       "sound": "boost_jump"
+    },
+    "inst_crash": {
+      "release_rate": 208,
+      "envelope": "envelope0",
+      "sound": "crash"
     }
   },
   "instrument_list": [
@@ -48,6 +53,7 @@
     "inst_steamhappy",
     "inst_mariosaysfuck",
     "inst_kirbyscream",
-    "inst_boost_jump"
+    "inst_boost_jump",
+    "inst_crash"
   ]
 }

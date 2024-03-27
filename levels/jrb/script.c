@@ -40,6 +40,7 @@ const LevelScript level_jrb_entry[] = {
 	JUMP_LINK(script_func_global_5), 
 	JUMP_LINK(script_func_global_14), 
 	LOAD_MODEL_FROM_GEO(MODEL_MARIOCAR, car_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_THE_CONTRAPTION, the_contraption_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -53,7 +54,7 @@ const LevelScript level_jrb_entry[] = {
 		MARIO_POS(0x01, 0, 0, 200, 0),
 		TERRAIN(jrb_area_1_collision),
 		MACRO_OBJECTS(jrb_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_EVENT_CUTSCENE_CREDITS),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

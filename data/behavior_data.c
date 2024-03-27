@@ -6217,3 +6217,14 @@ const BehaviorScript bhvMarioCar[] = {
         CALL_NATIVE(bhv_mario_car_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvTheContraption[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, the_contraption_anims),
+    ANIMATE(0),
+    CALL_NATIVE(bhv_the_contraption_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_the_contraption_loop),
+    END_LOOP(),
+};

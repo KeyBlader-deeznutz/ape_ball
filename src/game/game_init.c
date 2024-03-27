@@ -47,6 +47,7 @@ OSContStatus gControllerStatuses[MAXCONTROLLERS];
 OSContPadEx gControllerPads[MAXCONTROLLERS];
 u8 gControllerBits = 0b0000;
 u8 gBorderHeight;
+u8 gSlowdownCount;
 #ifdef VANILLA_STYLE_CUSTOM_DEBUG
 u8 gCustomDebugMode;
 #endif
@@ -449,6 +450,11 @@ void display_and_vsync(void) {
 #ifndef UNLOCK_FPS
     osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
 #endif
+
+    for (int i = 0; i < gSlowdownCount; i++) {
+        osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
+    }
+
     // Skip swapping buffers on inaccurate emulators other than VC so that they display immediately as the Gfx task finishes
     if (gEmulator & INSTANT_INPUT_BLACKLIST) {
         if (++sRenderedFramebuffer == 3) {
