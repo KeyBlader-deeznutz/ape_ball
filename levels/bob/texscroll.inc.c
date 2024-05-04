@@ -1,11 +1,11 @@
-void scroll_bob_dl_Plane_019_mesh_layer_1_vtx_2() {
+void scroll_bob_dl_Plane_019_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 4;
 	int height = 32 * 0x20;
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(bob_dl_Plane_019_mesh_layer_1_vtx_2);
+	Vtx *vertices = segmented_to_virtual(bob_dl_Plane_019_mesh_layer_1_vtx_0);
 
 	deltaY = (int)(-1.0 * 0x20) % height;
 
@@ -19,8 +19,8 @@ void scroll_bob_dl_Plane_019_mesh_layer_1_vtx_2() {
 	currentY += deltaY;
 }
 
-void scroll_gfx_mat_bob_dl_cozieswater_001_layer5_area2() {
-	Gfx *mat = segmented_to_virtual(mat_bob_dl_cozieswater_001_layer5_area2);
+void scroll_gfx_mat_bob_dl_cozieswater_001_layer5_area1() {
+	Gfx *mat = segmented_to_virtual(mat_bob_dl_cozieswater_001_layer5_area1);
 
 
 	shift_t(mat, 13, PACK_TILESIZE(0, 2));
@@ -42,7 +42,7 @@ void scroll_gfx_mat_bob_dl_f3dlite_material_024() {
 };
 
 void scroll_bob() {
-	scroll_bob_dl_Plane_019_mesh_layer_1_vtx_2();
-	scroll_gfx_mat_bob_dl_cozieswater_001_layer5_area2();
+	scroll_bob_dl_Plane_019_mesh_layer_1_vtx_0();
+	scroll_gfx_mat_bob_dl_cozieswater_001_layer5_area1();
 	scroll_gfx_mat_bob_dl_f3dlite_material_024();
 };

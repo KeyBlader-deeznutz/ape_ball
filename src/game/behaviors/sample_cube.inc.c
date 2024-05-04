@@ -285,7 +285,7 @@ void bhv_sample_cube_loop(void) {
 
         if (o->oTimer == 5 && o->oAction == 0) {
             if (gCurrAreaIndex == 1 && gCurrLevelNum == LEVEL_BOB) {
-                play_sound(SOUND_RAGDOLL3_SPOTLIGHT, gGlobalSoundSource);
+                //play_sound(SOUND_RAGDOLL3_SPOTLIGHT, gGlobalSoundSource);
             }
         }
         

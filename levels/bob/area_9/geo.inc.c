@@ -33,11 +33,6 @@ const GeoLayout bob_area_9[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bob_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bob_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, bob_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
