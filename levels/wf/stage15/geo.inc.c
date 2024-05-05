@@ -3,8 +3,7 @@
 const GeoLayout stage15_geo[] = {
 	GEO_CULLING_RADIUS(32767),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, stage15_Cube_004_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, stage15_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, stage15_Stage15_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

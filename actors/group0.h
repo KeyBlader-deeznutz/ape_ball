@@ -431,4 +431,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "goaltext/header.h"
 
+#include "goal/geo_header.h"
+
+#include "goal/collision_header.h"
+
 #endif

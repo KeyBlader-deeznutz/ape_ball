@@ -135,6 +135,7 @@ const LevelScript level_main_scripts_entry[] = {
         LOAD_MODEL_FROM_GEO(MODEL_BOOST_RING,            boost_ring_geo),
         LOAD_MODEL_FROM_GEO(MODEL_PLINKO_TEXT,            plinko_geo),
 
+        LOAD_MODEL_FROM_GEO(MODEL_GOAL,              goal_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE1,            stage1_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE2,            stage2_geo),
         LOAD_MODEL_FROM_GEO(MODEL_STAGE3,            stage3_geo),

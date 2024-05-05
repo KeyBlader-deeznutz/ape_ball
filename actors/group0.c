@@ -83,3 +83,5 @@
 #include "stage10/collision.inc.c"
 #include "plinko/model.inc.c"
 #include "goaltext/model.inc.c"
+#include "goal/model.inc.c"
+#include "goal/collision.inc.c"

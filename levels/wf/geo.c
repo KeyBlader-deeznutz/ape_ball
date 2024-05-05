@@ -51,3 +51,7 @@
 #include "levels/wf/rotater/geo.inc.c"
 #include "levels/wf/stage15/geo.inc.c"
 #include "levels/wf/stage16/geo.inc.c"
+#include "levels/wf/stage17/geo.inc.c"
+#include "levels/wf/stage18/geo.inc.c"
+#include "levels/wf/stage20/geo.inc.c"
+#include "levels/wf/stage19/geo.inc.c"

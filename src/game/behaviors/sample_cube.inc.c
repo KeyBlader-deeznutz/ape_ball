@@ -293,14 +293,17 @@ void bhv_sample_cube_loop(void) {
             deallocate_rigid_body(o->rigidBody);
             obj_mark_for_deletion(o);
             //warp logic
-            if (gCurrAreaIndex == 6 && gCurrLevelNum == LEVEL_WF && gChangingLevel == 1) {
-                initiate_warp(LEVEL_JRB, 1, 0x0A, 0);
-            }
-            else if (gCurrAreaIndex != 10 || gChangingLevel == 0) {
+            //if (gCurrAreaIndex == 6 && gCurrLevelNum == LEVEL_WF && gChangingLevel == 1) {
+            //    initiate_warp(LEVEL_JRB, 1, 0x0A, 0);
+            //}
+            if (gCurrAreaIndex != 10 || gChangingLevel == 0) {
                 initiate_warp(gCurrLevelNum, gCurrAreaIndex + (gChangingLevel == 1 ? 1 : 0), 0x0A, 0);
             }
             else if (gCurrLevelNum == LEVEL_BOB) {
                 initiate_warp(LEVEL_WF, 1, 0x0A, 0);
+            }
+            else if (gCurrLevelNum == LEVEL_WF) {
+                initiate_warp(LEVEL_CCM, 1, 0x0A, 0);
             }
             gChangingLevel = 0;
             return;
@@ -312,7 +315,7 @@ void bhv_sample_cube_loop(void) {
 
         if (gPlayer1Controller->buttonPressed & L_TRIG) {
 
-            //gChangingLevel = 1;
+            gChangingLevel = 1;
         }
         
         //regular action state

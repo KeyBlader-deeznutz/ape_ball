@@ -49,3 +49,4 @@
 #include "stage9/geo.inc.c"
 #include "stage10/geo.inc.c"
 #include "plinko/geo.inc.c"
+#include "goal/geo.inc.c"

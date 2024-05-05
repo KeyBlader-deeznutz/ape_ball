@@ -1,0 +1,16 @@
+extern const GeoLayout goal_geo[];
+extern Lights1 goal_Goal_tape_lights;
+extern u8 goal_fwater_i4[];
+extern u8 goal_Frushedwater_i4[];
+extern u8 goal_yippeeee_ci8[];
+extern u8 goal_yippeeee_pal_rgba16[];
+extern Vtx goal_Goal_mesh_layer_5_vtx_0[204];
+extern Gfx goal_Goal_mesh_layer_5_tri_0[];
+extern Vtx goal_Goal_mesh_layer_1_vtx_0[6];
+extern Gfx goal_Goal_mesh_layer_1_tri_0[];
+extern Gfx mat_goal_cozieswater_001_layer5[];
+extern Gfx mat_revert_goal_cozieswater_001_layer5[];
+extern Gfx mat_goal_Goal_tape[];
+extern Gfx mat_revert_goal_Goal_tape[];
+extern Gfx goal_Goal_mesh_layer_5[];
+extern Gfx goal_Goal_mesh_layer_1[];

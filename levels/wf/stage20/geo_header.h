@@ -1,0 +1,16 @@
+extern const GeoLayout stage20_geo[];
+extern Lights1 stage20_Sand_tiles_lights;
+extern Lights1 stage20_Sand_sides_lights;
+extern u8 stage20_sand_tiles_indexed_ci4[];
+extern u8 stage20_sand_tiles_indexed_pal_rgba16[];
+extern u8 stage20_index_side_ci4[];
+extern u8 stage20_index_side_pal_rgba16[];
+extern Vtx stage20_Stage20_mesh_layer_1_vtx_0[8];
+extern Gfx stage20_Stage20_mesh_layer_1_tri_0[];
+extern Vtx stage20_Stage20_mesh_layer_1_vtx_1[16];
+extern Gfx stage20_Stage20_mesh_layer_1_tri_1[];
+extern Gfx mat_stage20_Sand_tiles[];
+extern Gfx mat_revert_stage20_Sand_tiles[];
+extern Gfx mat_stage20_Sand_sides[];
+extern Gfx mat_revert_stage20_Sand_sides[];
+extern Gfx stage20_Stage20_mesh_layer_1[];

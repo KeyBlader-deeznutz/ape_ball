@@ -577,6 +577,8 @@
 #define MODEL_ROTATER           0x1A4
 #define MODEL_MARIOCAR           0x1A5
 #define MODEL_THE_CONTRAPTION           0x1A6
+#define MODEL_GOAL          0x1A7
+
 
 #define MODEL_STAGE1        0x112
 #define MODEL_STAGE2        0x113
@@ -597,6 +599,26 @@
 #define MODEL_STAGE17        0x122
 #define MODEL_STAGE18        0x123
 #define MODEL_STAGE19        0x124
+#define MODEL_STAGE20        0x125
+#define MODEL_STAGE21        0x126
+#define MODEL_STAGE22        0x127
+#define MODEL_STAGE23        0x128
+#define MODEL_STAGE24        0x129
+#define MODEL_STAGE25       0x12A
+#define MODEL_STAGE26       0x12B
+#define MODEL_STAGE27       0x12C
+#define MODEL_STAGE28       0x12D
+#define MODEL_STAGE29       0x12E
+#define MODEL_STAGE30       0x12F
+
+
+
+
+
+
+
+
+
 
 
 // Menu Models (overwrites Level Geometry IDs)

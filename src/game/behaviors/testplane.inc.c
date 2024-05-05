@@ -51,6 +51,48 @@ void bhv_testplane_init(void) {
         case 16:
             obj_set_collision_data(o, stage16_collision);
             break;
+        case 17:
+            obj_set_collision_data(o, stage17_collision);
+            break;
+        case 18:
+            obj_set_collision_data(o, stage18_collision);
+            break;
+        case 19:
+            obj_set_collision_data(o, stage19_collision);
+            break;
+        case 20:
+            obj_set_collision_data(o, stage20_collision);
+            break;
+        case 21:
+            obj_set_collision_data(o, stage21_collision);
+            break;
+        case 22:
+            obj_set_collision_data(o, stage22_collision);
+            break;
+        case 23:
+            obj_set_collision_data(o, stage23_collision);
+            break;
+        case 24:
+            obj_set_collision_data(o, stage24_collision);
+            break;
+        case 25:
+            obj_set_collision_data(o, stage25_collision);
+            break;
+        case 26:
+            obj_set_collision_data(o, stage26_collision);
+            break;
+        case 27:
+            obj_set_collision_data(o, stage27_collision);
+            break;
+        case 28:
+            obj_set_collision_data(o, stage28_collision);
+            break;
+        case 29:
+            obj_set_collision_data(o, stage29_collision);
+            break;
+        case 30:
+            obj_set_collision_data(o, stage30_collision);
+            break;
     }
 }
 
